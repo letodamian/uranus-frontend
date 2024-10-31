@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'ArcadeClassic';
+    src: url('/fonts/ARCADECLASSIC.TTF')format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
