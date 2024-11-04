@@ -32,13 +32,15 @@ export class Game extends Scene {
         //set background Iamge
 
         //setup ground
+        this.background = this.add.image(512,300,"background");
+
         this.ground = this.physics.add.staticGroup();
         this.ground.create(196.5, 800, "ground").setScale(1).refreshBody();
 
         //setup main character
         this.uranus = this.physics.add.sprite(80, 300, "uranus");
         this.uranus.setCollideWorldBounds(true);
-        this.uranus.setGravity(0, 250);
+        this.uranus.setGravity(0, 500);
         this.input.on("pointerdown", () => this.jump());
 
         // Inside create() method for uranus
@@ -120,7 +122,7 @@ export class Game extends Scene {
 
     //uranus jump function on mouse click
     jump() {
-        this.uranus.setVelocityY(-150);
+        this.uranus.setVelocityY(-250);
     }
 
     //adding random meteos

@@ -17,34 +17,46 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
 {
     const game = useRef<Phaser.Game | null>(null!);
 
-    useLayoutEffect(() =>
-    {
-        if (game.current === null)
-        {
-
+    useLayoutEffect(() => {
+        // Initialize game if it doesn't already exist
+        if (game.current === null) {
             game.current = StartGame("game-container");
-
-            if (typeof ref === 'function')
-            {
+    
+            // Attach ref
+            if (typeof ref === 'function') {
                 ref({ game: game.current, scene: null });
-            } else if (ref)
-            {
+            } else if (ref) {
                 ref.current = { game: game.current, scene: null };
             }
-
         }
-
-        return () =>
-        {
-            if (game.current)
-            {
-                game.current.destroy(true);
-                if (game.current !== null)
-                {
-                    game.current = null;
+    
+        // Handle resize function
+        const resizeGame = () => {
+            if (game.current) {
+                const parentElement = document.getElementById("game-container");
+                const width = parentElement?.clientWidth;
+                const height = parentElement?.clientHeight;
+    
+                if (width && height) {
+                    game.current.scale.resize(width, height);
                 }
             }
-        }
+        };
+    
+        // Attach resize event listener
+        window.addEventListener("resize", resizeGame);
+    
+        // Initial resize in case the parent container is resized after mount
+        resizeGame();
+    
+        // Clean up
+        return () => {
+            window.removeEventListener("resize", resizeGame);
+            if (game.current) {
+                game.current.destroy(true);
+                game.current = null;
+            }
+        };
     }, [ref]);
 
     useEffect(() =>

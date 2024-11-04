@@ -1,64 +1,105 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useEffect, useRef, useState } from "react";
+import PointPanel from "./components/PointPanel";
+import RankPanel from "./components/RankPanel"
+import { IRefPhaserGame, PhaserGame } from "./game/PhaserGame";
+import { EventBus } from "./game/EventBus";
+
+import { useNavigate } from "react-router-dom";
 
 const Leaderboard = () => {
-  return (
-    <div className="bg-black text-white w-full h-full font-mono p-4 space-y-4">
-      {/* Points Section */}
-      <div className="text-center space-y-2">
-        <h2 className="text-lg">YOUR POINTS</h2>
-        <div className="bg-gray-600 rounded-lg p-2 flex justify-between">
-          <span>Total Points</span>
-          <span>1200</span>
-        </div>
-        <div className="bg-gray-600 rounded-lg p-2 flex justify-between">
-          <span>Game Points</span>
-          <span>1200</span>
-        </div>
-        <div className="bg-gray-600 rounded-lg p-2 flex justify-between">
-          <span>Referral Points</span>
-          <span>200</span>
-        </div>
-        <div className="bg-gray-600 rounded-lg p-2 flex justify-between">
-          <span>Social Points</span>
-          <span>200</span>
-        </div>
-      </div>
+    const [isGameOver, setIsGameOver] = useState(true);
+    const [isDaily, setIsDaily] = useState(0);
 
-      {/* Leaderboard Section */}
-      <div className="border-2 border-blue-500 p-4 rounded-lg">
-        <h2 className="text-center text-lg">LEADERBOARD</h2>
-        <div className="flex justify-center space-x-4 text-xs mt-2 border-b border-gray-400 pb-2">
-          <button className="text-white border-b-2 border-white">Daily</button>
-          <button>Weekly</button>
-          <button>All Time</button>
-        </div>
-        <div className="mt-4 space-y-2">
-          {[1, 2, 3, 4, 5, 6].map((rank) => (
-            <div
-              key={rank}
-              className="bg-gray-500 rounded-lg p-2 flex justify-between items-center"
-            >
-              <span className="bg-black text-white p-2 rounded-full w-8 h-8 flex items-center justify-center">
-                {rank}
-              </span>
-              <span className="flex-1 text-center">USERNAME</span>
-              <span>300</span>
+    const  handleClick = (n:number) => {
+        setIsDaily(n);
+    }
+
+
+    const navigate = useNavigate();
+    const phaserRef = useRef<IRefPhaserGame | null>(null);
+    
+    const goToHome = () => {
+        navigate("/");
+    };
+    const goToLeaderboard = () => {
+        navigate("/leaderboard");
+    };
+    const goToFriends = () => {
+        navigate("/friends");
+    };
+    useEffect(() => {
+        const handleGameOver = () => {
+            setIsGameOver(true);
+        };
+        EventBus.on("game-over", handleGameOver);
+        EventBus.on("game-play", () => {
+            setIsGameOver(false);
+        });
+
+        // Clean up on unmount
+        return () => {
+            EventBus.off("game-over", handleGameOver);
+        };
+    }, []);
+    return (
+        <div className=" text-white w-full h-full px-4 pb-4 pt-10 space-y-4 font-['ArcadeClassic']  bg-[url('/assets/background.jpeg')] bg-cover">
+            {/* Points Section */}
+            <div className="space-y-2">
+                <h2 className="text-2xl font-['ArcadeClassic']">YOUR POINTS</h2>
+                <PointPanel label="TOTAL POINTS" points={1200} />
+                <PointPanel label="GAME POINTS" points={1200} />
+                <PointPanel label="REFERRAL POINTS" points={200} />
+                <PointPanel label="SOCIAL POINTS" points={200} />
             </div>
-          ))}
-        </div>
-        <p className="text-center text-xs mt-4">Your Position: 40 / 120000</p>
-      </div>
 
-      {/* Footer Navigation */}
-      <div className="flex justify-around bg-gray-800 p-4 mt-4 rounded-lg">
-        <button className="bg-white text-black py-2 px-4 rounded">Play</button>
-        <button className="bg-white text-black py-2 px-4 rounded">
-          Leaderboard
-        </button>
-        <button className="bg-white text-black py-2 px-4 rounded">Friends</button>
-      </div>
-    </div>
-  );
+            {/* Leaderboard Section */}
+            <div className="rounded-lg">
+                <h2 className="text-2xl">LEADERBOARD</h2>
+                <div className="flex justify-start space-x-4 text-lg mt-2 border-b border-gray-400 pb-2">
+                    <button onClick={()=>setIsDaily(0)} className={`text-white ${isDaily === 0 ? 'border-b-2' : ''} border-white`}>
+                        Daily
+                    </button>
+                    <button onClick={()=>setIsDaily(1)} className={`text-white ${isDaily === 1 ? 'border-b-2' : ''} border-white`}>Weekly</button>
+                    <button onClick={()=>setIsDaily(2)} className={`text-white ${isDaily === 2 ? 'border-b-2' : ''} border-white`}>All Time</button>
+                </div>
+                <div className="m-2 row">
+                    {[1, 2, 3, 4, 5, 6].map((rank,index) => (
+                        <RankPanel key={index} ranking={index + 1} userName="username" points={200}/>
+                    ))}
+                </div>
+                <p className="text-center text-lg mt-4">
+                    Your Position: 40 / 120000
+                </p>
+            </div>
+
+            {/* Footer Navigation */}
+            <div
+                className={`absolute w-full bottom-2 left-0 ${
+                    isGameOver == true ? "flex" : "hidden"
+                } justify-between p-4 gap-1`}
+            >
+                <button
+                    onClick={goToHome}
+                    className="bg-white hover:bg-slate-500 active:bg-white text-black font-bold py-2 px-4 rounded-lg shadow-md font-['ArcadeClassic']"
+                >
+                    PLAY
+                </button>
+                <button
+                    onClick={goToLeaderboard}
+                    className="bg-white hover:bg-slate-500 active:bg-white  text-black font-bold py-2 px-4 rounded-lg shadow-md font-['ArcadeClassic']"
+                >
+                    LEADERBOARD
+                </button>
+                <button
+                    onClick={goToFriends}
+                    className="bg-white hover:bg-slate-500 active:bg-white text-black font-bold py-2 px-4 rounded-lg shadow-md font-['ArcadeClassic']"
+                >
+                    FRIENDS
+                </button>
+            </div>
+        </div>
+    );
 };
 
 export default Leaderboard;

@@ -12,6 +12,9 @@ type GameOverEvent = {
 function Home() {
     const navigate = useNavigate();
 
+  const goToHome = () => {
+    navigate('/');
+  }  
   const goToLeaderboard = () => {
     navigate('/leaderboard');
   };
@@ -59,7 +62,7 @@ function Home() {
     return (
         <div
             id="home"
-            className="w-[393px] h-[852px] bg-white relative font-['ArcadeClassic'] bg-cover bg-center"
+            className="w-full h-full bg-white relative font-['ArcadeClassic'] bg-cover bg-center"
             style={{ backgroundImage: "url('/assets/background.jpeg')" }}
         >
             <PhaserGame ref={phaserRef} currentActiveScene={currentScene} />

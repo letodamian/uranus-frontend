@@ -21,7 +21,8 @@ export class MainMenu extends Scene {
     }
 
     create() {
-
+    
+        this.background = this.add.image(512,300,"background");
         this.logo = this.add.image(196, 150, "logo").setDepth(100);
         this.ringUranus = this.add.image(196, 500, "ring").setDepth(100);
         this.ground = this.add.image(196, 800, "ground").setDepth(100);

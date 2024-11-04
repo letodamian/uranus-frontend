@@ -5,7 +5,7 @@ import Friends from "./Friends";
 
 function App() {
   return (
-    <div>
+    <div className="h-screen w-screen bg-[url('/assets/background.jpeg')]">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/leaderboard" element={<LeaderBoard />} />
