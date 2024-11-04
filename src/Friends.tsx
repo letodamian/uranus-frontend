@@ -102,7 +102,7 @@ const Friends = () => {
                 </div>
             </div>
             {/* Footer Navigation */}
-            <div className=" w-full bottom-2 left-0 flex justify-between p-4 gap-1">
+            <div className="absolute w-full bottom-2 left-0 flex justify-between p-4 gap-1">
                 <button
                     onClick={goToHome}
                     className="bg-white hover:bg-slate-500 active:bg-white text-black font-bold py-2 px-4 rounded-lg shadow-md font-['ArcadeClassic']"
