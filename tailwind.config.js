@@ -15,7 +15,7 @@ export const theme = {
     },
     aspectRatio: {
       // Add custom aspect ratio for 393:852
-      '393/852': '393 / 852', // Custom ratio utility
+      '9/16': '9 / 16', // Custom ratio utility
     },
   },
 };

@@ -3,16 +3,15 @@ import { Game as MainGame } from "./scenes/Game";
 import { MainMenu } from "./scenes/MainMenu";
 import { AUTO, Game } from "phaser";
 import { Preloader } from "./scenes/Preloader";
-const aspectWidth = 393;
-const aspectHeight = 852;
+const aspectWidth = 9;
+const aspectHeight = 16;
 const aspectRatio = aspectWidth / aspectHeight;
 
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config: Phaser.Types.Core.GameConfig = {
     type: AUTO,
-    width: 393,
-    height: 852,
+   
     parent: "game-container",
     backgroundColor: "#000000",
     physics: {
