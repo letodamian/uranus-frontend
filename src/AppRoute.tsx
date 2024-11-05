@@ -6,7 +6,7 @@ import Friends from "./Friends";
 function AppRoute() {
     return (
         <div className="relative w-full h-full">
-            <div className="aspect-9/16">
+            <div className="aspect-10/16">
                 <div className="absolute inset-0">
                     <Routes>
                         <Route path="/" element={<Home />} />
