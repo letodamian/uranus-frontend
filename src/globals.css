@@ -3,8 +3,30 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'ArcadeClassic';
-    src: url('/fonts/ARCADECLASSIC.TTF')format('truetype');
+    font-family: "ArcadeClassic";
+    src: url("/fonts/ARCADECLASSIC.TTF") format("truetype");
     font-weight: normal;
     font-style: normal;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar in Webkit browsers */
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none; /* Hides scrollbar in Internet Explorer */
+    scrollbar-width: none; /* Hides scrollbar in Firefox */
+}
+
+.phaser-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+}
+
+.phaser-game {
+    /* Set the width and height to match the Phaser game size */
+    width: 800px; /* Match Phaser game width */
+    height: 600px; /* Match Phaser game height */
 }

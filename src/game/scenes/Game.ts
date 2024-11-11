@@ -35,12 +35,12 @@ export class Game extends Scene {
         this.background = this.add.image(512,300,"background");
 
         this.ground = this.physics.add.staticGroup();
-        this.ground.create(196.5, 800, "ground").setScale(1).refreshBody();
+        this.ground.create(196.5, 600, "ground").setScale(1).refreshBody();
 
         //setup main character
         this.uranus = this.physics.add.sprite(80, 300, "uranus");
         this.uranus.setCollideWorldBounds(true);
-        this.uranus.setGravity(0, 500);
+        this.uranus.setGravity(0, 750);
         this.input.on("pointerdown", () => this.jump());
 
         // Inside create() method for uranus
@@ -131,7 +131,7 @@ export class Game extends Scene {
         const meteoType = Phaser.Math.Between(1, 3);
         const meteo = this.meteos.create(
             900,
-            Phaser.Math.Between(150, 650),
+            Phaser.Math.Between(150, 550),
             `meteo${meteoType}`
         );
 

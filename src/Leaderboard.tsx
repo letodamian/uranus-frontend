@@ -43,7 +43,7 @@ const Leaderboard = () => {
         };
     }, []);
     return (
-        <div className=" text-white w-full h-full px-4 pb-4 pt-10 space-y-4 font-['ArcadeClassic']  bg-[url('/assets/background.jpeg')] bg-cover">
+        <div className=" text-white w-full max-w-sm h-screen px-4 pb-4 pt-10 font-['ArcadeClassic']  bg-[url('/assets/background.jpeg')] bg-cover relative">
             {/* Points Section */}
             <div className="space-y-2">
                 <h2 className="text-2xl font-['ArcadeClassic']">YOUR POINTS</h2>

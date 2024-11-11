@@ -42,8 +42,9 @@ const Friends = () => {
         };
     }, []);
     return (
-        <div className=" text-white w-full h-full px-4 pb-4 pt-10 space-y-4 font-['ArcadeClassic']  bg-[url('/assets/background.jpeg')] bg-cover overflow-scroll">
+        <div className=" text-white max-w-sm h-full px-4 pb-4 pt-10 space-y-4 font-['ArcadeClassic']  bg-[url('/assets/background.jpeg')] bg-cover relative">
             {/* friends Section */}
+            <div className="h-full overflow-auto no-scrollbar">
             <div className="flex flex-col pt-4 ">
                 <div className="text-3xl uppercase">friends</div>
                 <div className="text-2xl uppercase">
@@ -70,7 +71,7 @@ const Friends = () => {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className="pb-12">
                     <div className="text-xl uppercase">Social task</div>
                     <div className="text-xl uppercase">
                         Earn +50 points per task
@@ -100,6 +101,7 @@ const Friends = () => {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             {/* Footer Navigation */}
             <div className="absolute w-full bottom-2 left-0 flex justify-between p-4 gap-1">

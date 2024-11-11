@@ -21,11 +21,15 @@ export class MainMenu extends Scene {
     }
 
     create() {
-    
-        this.background = this.add.image(512,300,"background");
+        console.log("width:", this.scale.gameSize.height);
+        const centerY = this.scale.gameSize.height / 2;
+        const centerX = this.scale.gameSize.width / 2;
+        this.background = this.add.image(512, 300, "background");
         this.logo = this.add.image(196, 150, "logo").setDepth(100);
         this.ringUranus = this.add.image(196, 500, "ring").setDepth(100);
-        this.ground = this.add.image(196, 800, "ground").setDepth(100);
+        this.ground = this.add
+            .image(centerX, centerY * 2, "ground")
+            .setDepth(100);
 
         this.title = this.add
             .text(196, 280, "TOP SCORE", {
@@ -58,8 +62,6 @@ export class MainMenu extends Scene {
             color: "#fff",
         });
 
-     
-
         const buttonWidth = 150;
         const buttonHeight = 50;
         const buttonRadius = 10;
@@ -67,8 +69,8 @@ export class MainMenu extends Scene {
         const restartButtonBg = this.add.graphics();
         restartButtonBg.fillStyle(0xffffff, 1);
         restartButtonBg.fillRoundedRect(
-            196 - buttonWidth / 2,
-            650 - buttonHeight / 2,
+            centerX - buttonWidth / 2,
+            centerY - buttonHeight / 2 + 100,
             buttonWidth,
             buttonHeight,
             buttonRadius
@@ -76,7 +78,7 @@ export class MainMenu extends Scene {
 
         // Create the restart text on top of the button
         const restartButtonText = this.add
-            .text(196, 650, "START", {
+            .text(centerX, centerY + 100, "START", {
                 fontSize: "36px",
                 color: "#000",
                 fontFamily: "ArcadeClassic",
@@ -86,17 +88,16 @@ export class MainMenu extends Scene {
         // Make the button interactive
         restartButtonBg.setInteractive(
             new Phaser.Geom.Rectangle(
-                196 - buttonWidth / 2,
-                650 - buttonHeight / 2,
+                centerX - buttonWidth / 2,
+                centerY - buttonHeight / 2 + 100,
                 buttonWidth,
                 buttonHeight
             ),
             Phaser.Geom.Rectangle.Contains
         );
         restartButtonBg.on("pointerdown", () => {
-            this.changeScene(); 
-        EventBus.emit("game-play");
-
+            this.changeScene();
+            EventBus.emit("game-play");
         });
 
         // Optional: Add hover effect
@@ -104,8 +105,8 @@ export class MainMenu extends Scene {
             restartButtonBg.clear();
             restartButtonBg.fillStyle(0x888888, 1); // Darker color on hover
             restartButtonBg.fillRoundedRect(
-                196 - buttonWidth / 2,
-                650 - buttonHeight / 2,
+                centerX - buttonWidth / 2,
+                centerY - buttonHeight / 2 + 100,
                 buttonWidth,
                 buttonHeight,
                 buttonRadius
@@ -115,8 +116,8 @@ export class MainMenu extends Scene {
             restartButtonBg.clear();
             restartButtonBg.fillStyle(0xffffff, 1); // Original color
             restartButtonBg.fillRoundedRect(
-                196 - buttonWidth / 2,
-                650 - buttonHeight / 2,
+                centerX - buttonWidth / 2,
+                centerY - buttonHeight / 2 + 100,
                 buttonWidth,
                 buttonHeight,
                 buttonRadius

@@ -62,7 +62,7 @@ function Home() {
     return (
         <div
             id="home"
-            className="w-full h-full bg-white relative font-['ArcadeClassic'] bg-cover bg-center"
+            className="w-full max-w-sm h-full bg-white relative font-['ArcadeClassic'] bg-cover bg-center"
             style={{ backgroundImage: "url('/assets/background.jpeg')" }}
         >
             <PhaserGame ref={phaserRef} currentActiveScene={currentScene} />

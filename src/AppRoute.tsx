@@ -5,18 +5,15 @@ import Friends from "./Friends";
 
 function AppRoute() {
     return (
-        <div className="relative w-full h-full">
-            <div className="aspect-10/16">
-                <div className="absolute inset-0">
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/leaderboard" element={<LeaderBoard />} />
-                        <Route path="/friends" element={<Friends />} />
-                    </Routes>
-                </div>
-            </div>
+        <div className="flex justify-center">
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/leaderboard" element={<LeaderBoard />} />
+                <Route path="/friends" element={<Friends />} />
+            </Routes>
         </div>
     );
 }
 
 export default AppRoute;
+
