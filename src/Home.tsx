@@ -3,7 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { IRefPhaserGame, PhaserGame } from "./game/PhaserGame";
 import { MainMenu } from "./game/scenes/MainMenu";
 import { EventBus } from "./game/EventBus";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useUser } from "./hook/useUser";
+import { sendGamePoint } from "./lib/api";
 
 type GameOverEvent = {
     score: number;
@@ -12,15 +14,20 @@ type GameOverEvent = {
 function Home() {
     const navigate = useNavigate();
 
-  const goToHome = () => {
-    navigate('/');
-  }  
-  const goToLeaderboard = () => {
-    navigate('/leaderboard');
-  };
-  const goToFriends = () => {
-    navigate('/friends');
-  };
+    const goToHome = () => {
+        navigate("/");
+    };
+    const goToLeaderboard = () => {
+        navigate("/leaderboard");
+    };
+    const goToFriends = () => {
+        navigate("/friends");
+    };
+
+    const user = useUser();
+
+    const userId = user?.userId;
+    const userName = user?.userName;
     // The sprite can only be moved in the MainMenu Scene
     const [canMoveSprite, setCanMoveSprite] = useState(true);
     const [isGameOver, setIsGameOver] = useState(false);
@@ -50,9 +57,12 @@ function Home() {
         const handleGameOver = ({ score }: GameOverEvent) => {
             setIsGameOver(true);
             setScore(score);
+            sendGamePoint(userId?.toString() ,userName, score)
         };
         EventBus.on("game-over", handleGameOver);
-        EventBus.on("game-play", ()=> {setIsGameOver(false)})
+        EventBus.on("game-play", () => {
+            setIsGameOver(false);
+        });
 
         // Clean up on unmount
         return () => {
@@ -69,7 +79,8 @@ function Home() {
 
             <div
                 className={`absolute w-full bottom-2 left-0 ${
-                    phaserRef.current?.scene?.scene.key == "MainMenu" || isGameOver == true
+                    phaserRef.current?.scene?.scene.key == "MainMenu" ||
+                    isGameOver == true
                         ? "flex"
                         : "hidden"
                 } justify-between p-4 gap-1`}
@@ -80,10 +91,16 @@ function Home() {
                 >
                     PLAY
                 </button>
-                <button onClick={goToLeaderboard} className="bg-white hover:bg-slate-500 active:bg-white  text-black font-bold py-2 px-4 rounded-lg shadow-md font-['ArcadeClassic']">
+                <button
+                    onClick={goToLeaderboard}
+                    className="bg-white hover:bg-slate-500 active:bg-white  text-black font-bold py-2 px-4 rounded-lg shadow-md font-['ArcadeClassic']"
+                >
                     LEADERBOARD
                 </button>
-                <button onClick={goToFriends} className="bg-white hover:bg-slate-500 active:bg-white text-black font-bold py-2 px-4 rounded-lg shadow-md font-['ArcadeClassic']">
+                <button
+                    onClick={goToFriends}
+                    className="bg-white hover:bg-slate-500 active:bg-white text-black font-bold py-2 px-4 rounded-lg shadow-md font-['ArcadeClassic']"
+                >
                     FRIENDS
                 </button>
             </div>
@@ -92,4 +109,3 @@ function Home() {
 }
 
 export default Home;
-

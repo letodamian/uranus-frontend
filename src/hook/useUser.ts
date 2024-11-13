@@ -1,4 +1,3 @@
-import { useRef } from "react";
 
 function generateInviteCode(userName: string, userId: string): string {
     const data = `${userName} + ${userId}`;
@@ -41,8 +40,7 @@ declare global {
 }
 
 export const useUser = () => {
-    const userName = useRef<string | null>(null);
-    const userId = useRef<number | null>(null);
+
 
     if (window.Telegram && window.Telegram.WebApp) {
         // Get user data from Telegram WebApp if available
@@ -52,14 +50,14 @@ export const useUser = () => {
             console.log("User data from Telegram:", initDataUnsafe.user);
             console.log("userName:", initDataUnsafe.user.username);
 
-            userName.current = initDataUnsafe.user.username;
-            userId.current = initDataUnsafe.user.id;
+            const userName = initDataUnsafe.user.username;
+            const userId = initDataUnsafe.user.id;
             const code = generateInviteCode(
-                userName.current,
-                userId.current.toString()
+                userName,
+                userId.toString()
             );
             console.log("userId:", initDataUnsafe.user.id);
-            return { userName, userId, code };
+            return { userId, userName, code };
         } else {
             console.log(
                 "Telegram WebApp not found or user data is unavailable"
