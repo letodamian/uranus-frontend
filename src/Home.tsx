@@ -57,7 +57,7 @@ function Home() {
         const handleGameOver = ({ score }: GameOverEvent) => {
             setIsGameOver(true);
             setScore(score);
-            sendGamePoint(userId?.toString() ,userName, score)
+            sendGamePoint(userId?.toString() ,userName, Math.floor(score/30));
         };
         EventBus.on("game-over", handleGameOver);
         EventBus.on("game-play", () => {
