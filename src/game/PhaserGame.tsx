@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useLayoutEffect, useRef } from "react";
 import StartGame from "./main";
 import { EventBus } from "./EventBus";
-//import { useUser } from "../hook/useUser";
+import { useUser } from "../hook/useUser";
 
 export interface IRefPhaserGame {
     game: Phaser.Game | null;
@@ -15,6 +15,9 @@ interface IProps {
 export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(
     function PhaserGame({ currentActiveScene }, ref) {
         const game = useRef<Phaser.Game | null>(null!);
+        const user = useUser();
+
+        const userId = user?.userId;
         useLayoutEffect(() => {
             // Initialize game if it doesn't already exist
             if (game.current === null) {
@@ -59,6 +62,10 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(
         }, [ref]);
 
         useEffect(() => {
+            if (userId) {
+                // Emit the user data to be received by Phaser scenes
+                EventBus.emit("user-data-ready", userId);
+            }
             EventBus.on(
                 "current-scene-ready",
                 (scene_instance: Phaser.Scene) => {
@@ -79,6 +86,7 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(
                     }
                 }
             );
+
             return () => {
                 EventBus.removeListener("current-scene-ready");
             };

@@ -57,7 +57,7 @@ export const useUser = () => {
                 userId.toString()
             );
             console.log("userId:", initDataUnsafe.user.id);
-            return { userId, userName, code };
+            return { userId:userId.toString(), userName, code };
         } else {
             console.log(
                 "Telegram WebApp not found or user data is unavailable"

@@ -28,7 +28,7 @@ export class Game extends Scene {
         this.score = 0;
         this.meteoSpawnInterval = 1500;
         this.meteoSpeedBase = 200;
-
+        this.energyCount = 50
         //set background Iamge
 
         //setup ground

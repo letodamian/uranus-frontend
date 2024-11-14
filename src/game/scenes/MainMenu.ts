@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { GameObjects, Scene } from "phaser";
 import { EventBus } from "../EventBus";
+import { getGameData } from "../../lib/api";
 
 export class MainMenu extends Scene {
     background: GameObjects.Image;
@@ -21,6 +22,10 @@ export class MainMenu extends Scene {
     }
 
     create() {
+        EventBus.on("user-data-ready", (userId: string | undefined) => {
+        const data = getGameData(userId)
+        console.log("main data:", data)
+        })
         console.log("width:", this.scale.gameSize.height);
         const centerY = this.scale.gameSize.height / 2;
         const centerX = this.scale.gameSize.width / 2;
