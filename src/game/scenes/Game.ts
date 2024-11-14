@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { getGameData } from "../../lib/api";
 import { EventBus } from "../EventBus";
 import { Scene } from "phaser";
 
@@ -24,11 +25,16 @@ export class Game extends Scene {
     }
 
     create() {
+        EventBus.on("user-data-ready", async (userId: string | undefined) => {
+            const data = await getGameData(userId)
+            if(data){
+                this.energyCount = data.energy;
+            }
+            })
         this.gameOver = false;
         this.score = 0;
         this.meteoSpawnInterval = 1500;
         this.meteoSpeedBase = 200;
-        this.energyCount = 50
         //set background Iamge
 
         //setup ground
@@ -111,6 +117,12 @@ export class Game extends Scene {
 
     //display change per frame
     update() {
+        EventBus.on("user-data-ready", async (userId: string | undefined) => {
+            const data = await getGameData(userId)
+            if(data){
+                this.energyCount = data.energy;
+            }
+            })
         if (this.gameOver) return;
 
         //Increase score over time
@@ -162,8 +174,13 @@ export class Game extends Scene {
         this.physics.pause();
 
         //when uranus die, decrease energy by 1
-        this.energyCount--;
-        console.log("energy", this.energyCount);
+        EventBus.on("user-data-ready", async (userId: string | undefined) => {
+            const data = await getGameData(userId)
+            if(data){
+                this.energyCount = data.energy;
+                this.highScore = data.topScore;
+            }
+            })
         this.energyText.setText(`${this.energyCount}`);
 
         this.add.text(196, 240, "HIGH SCORE", {
