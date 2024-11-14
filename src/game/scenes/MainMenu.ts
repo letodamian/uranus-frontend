@@ -24,12 +24,12 @@ export class MainMenu extends Scene {
 
     create() {
         EventBus.on("user-data-ready", async (userId: string | undefined) => {
-        const data = await getGameData(userId)
-        if(data){
-            this.energyCount = data.energy;
-            this.scoreCount = data.topScore;
-        }
-        })
+            const data = await getGameData(userId);
+            if (data) {
+                this.energyCount = data.energy;
+                this.scoreCount = data.topScore;
+            }
+        });
         console.log("width:", this.scale.gameSize.height);
         const centerY = this.scale.gameSize.height / 2;
         const centerX = this.scale.gameSize.width / 2;
@@ -38,6 +38,7 @@ export class MainMenu extends Scene {
         this.ringUranus = this.add.image(196, 500, "ring").setDepth(100);
         this.ground = this.add
             .image(centerX, centerY * 2, "ground")
+            .setScale(1, 2)
             .setDepth(100);
 
         this.title = this.add
@@ -53,7 +54,7 @@ export class MainMenu extends Scene {
             .setDepth(100);
 
         this.score = this.add
-            .text(196, 330,`${this.scoreCount}`, {
+            .text(196, 330, `${this.scoreCount}`, {
                 fontFamily: "ArcadeClassic",
                 fontSize: 64,
                 color: "#ffffff",

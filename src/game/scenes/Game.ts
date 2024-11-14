@@ -25,6 +25,8 @@ export class Game extends Scene {
     }
 
     create() {
+        const centerY = this.scale.gameSize.height / 2;
+        const centerX = this.scale.gameSize.width / 2;
         EventBus.on("user-data-ready", async (userId: string | undefined) => {
             const data = await getGameData(userId)
             if(data){
@@ -41,7 +43,7 @@ export class Game extends Scene {
         this.background = this.add.image(512,300,"background");
 
         this.ground = this.physics.add.staticGroup();
-        this.ground.create(196.5, 600, "ground").setScale(1).refreshBody();
+        this.ground.create(centerX, centerY * 2, "ground").setScale(1,2).refreshBody();
 
         //setup main character
         this.uranus = this.physics.add.sprite(80, 300, "uranus");
