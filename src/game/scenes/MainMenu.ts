@@ -22,8 +22,8 @@ export class MainMenu extends Scene {
     }
 
     create() {
-        EventBus.on("user-data-ready", (userId: string | undefined) => {
-        const data = getGameData(userId)
+        EventBus.on("user-data-ready", async (userId: string | undefined) => {
+        const data = await getGameData(userId)
         console.log("main data:", data)
         })
         console.log("width:", this.scale.gameSize.height);
