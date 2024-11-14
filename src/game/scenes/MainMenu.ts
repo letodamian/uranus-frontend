@@ -14,6 +14,7 @@ export class MainMenu extends Scene {
     energyText: Phaser.GameObjects.Text;
     energy: Phaser.GameObjects.Image;
     energyCount = 100;
+    scoreCount = 0;
 
     logoTween: Phaser.Tweens.Tween | null;
 
@@ -24,7 +25,10 @@ export class MainMenu extends Scene {
     create() {
         EventBus.on("user-data-ready", async (userId: string | undefined) => {
         const data = await getGameData(userId)
-        console.log("main data:", data)
+        if(data){
+            this.energyCount = data.energy;
+            this.scoreCount = data.topScore;
+        }
         })
         console.log("width:", this.scale.gameSize.height);
         const centerY = this.scale.gameSize.height / 2;
@@ -49,7 +53,7 @@ export class MainMenu extends Scene {
             .setDepth(100);
 
         this.score = this.add
-            .text(196, 330, "1200", {
+            .text(196, 330,`${this.scoreCount}`, {
                 fontFamily: "ArcadeClassic",
                 fontSize: 64,
                 color: "#ffffff",
