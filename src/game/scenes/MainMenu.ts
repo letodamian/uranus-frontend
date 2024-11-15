@@ -39,11 +39,11 @@ export class MainMenu extends Scene {
             .image(centerX, centerY + 90, "ring")
             .setDepth(10);
         this.ground = this.add
-            .image(centerX, centerY * 2 - 80, "ground")
+            .image(centerX, centerY * 2 - 100, "ground")
             .setDepth(100);
 
         this.title = this.add
-            .text(centerX, centerY - 120, "TOP SCORE", {
+            .text(centerX, centerY - 160, "TOP SCORE", {
                 fontFamily: "ArcadeClassic",
                 fontSize: 36,
                 color: "#ffffff",
@@ -55,7 +55,7 @@ export class MainMenu extends Scene {
             .setDepth(100);
 
         this.score = this.add
-            .text(centerX, centerY - 80, `${this.scoreCount}`, {
+            .text(centerX, centerY - 120, `${this.scoreCount}`, {
                 fontFamily: "ArcadeClassic",
                 fontSize: 64,
                 color: "#ffffff",
