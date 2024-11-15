@@ -94,7 +94,7 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(
 
         return (
             <div className="phaser-container">
-                <div id="game-container" className="phaser-game"></div>
+                <div id="game-container" className="phaser-game w-full h-full"></div>
             </div>
         );
     }
