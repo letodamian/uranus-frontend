@@ -39,7 +39,7 @@ export class MainMenu extends Scene {
             .image(centerX, centerY + 90, "ring")
             .setDepth(10);
         this.ground = this.add
-            .image(centerX, centerY * 2 - 80, "ground")
+            .image(centerX, centerY * 2 - 50, "ground")
             .setDepth(100);
 
         this.title = this.add
