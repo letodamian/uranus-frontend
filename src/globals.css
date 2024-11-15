@@ -27,6 +27,7 @@
 
 .phaser-game {
     /* Set the width and height to match the Phaser game size */
-    width: 800px; /* Match Phaser game width */
-    height: 600px; /* Match Phaser game height */
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
