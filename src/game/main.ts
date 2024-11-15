@@ -26,7 +26,7 @@ const config: Phaser.Types.Core.GameConfig = {
         mode: Phaser.Scale.FIT, // Scale to fit the screen while maintaining aspect ratio
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: window.innerWidth, // Calculate width based on screen height
-        height: window.innerHeight + 50,              // Set initial height as screen height
+        height: window.innerHeight,              // Set initial height as screen height
       },
     scene: [Boot, Preloader, MainMenu, MainGame],
 };
