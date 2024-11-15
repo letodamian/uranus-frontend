@@ -18,7 +18,7 @@ export class Game extends Scene {
     energyCount = 100;
     scoreText: Phaser.GameObjects.Text;
     score = 0;
-    highScore = 1200;
+    highScore = 0;
 
     constructor() {
         super("Game");
@@ -43,7 +43,7 @@ export class Game extends Scene {
         this.background = this.add.image(512,300,"background");
 
         this.ground = this.physics.add.staticGroup();
-        this.ground.create(centerX, centerY * 2 + 50, "ground").setScale(1,1.5).refreshBody();
+        this.ground.create(centerX, centerY * 2 + 50, "ground").setScale(1,1).refreshBody();
 
         //setup main character
         this.uranus = this.physics.add.sprite(80, 300, "uranus");
