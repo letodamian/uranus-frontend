@@ -35,7 +35,7 @@ export class MainMenu extends Scene {
         this.background = this.add.image(512, 300, "background");
         this.logo = this.add.image(centerX, 120, "logo").setDepth(100);
         this.ringUranus = this.add
-            .image(centerX, centerY + 110, "ring")
+            .image(centerX, centerY + 140, "ring")
             .setDepth(10);
         this.ground = this.add
             .image(centerX, centerY * 2 - 50, "ground")
@@ -80,7 +80,7 @@ export class MainMenu extends Scene {
         restartButtonBg.fillStyle(0xffffff, 1);
         restartButtonBg.fillRoundedRect(
             centerX - buttonWidth / 2,
-            centerY - buttonHeight / 2 - 30,
+            centerY - buttonHeight / 2 ,
             buttonWidth,
             buttonHeight,
             buttonRadius
@@ -88,7 +88,7 @@ export class MainMenu extends Scene {
 
         // Create the restart text on top of the button
         const restartButtonText = this.add
-            .text(centerX, centerY - 30, "START", {
+            .text(centerX, centerY , "START", {
                 fontSize: "36px",
                 color: "#000",
                 fontFamily: "ArcadeClassic",
@@ -99,7 +99,7 @@ export class MainMenu extends Scene {
         restartButtonBg.setInteractive(
             new Phaser.Geom.Rectangle(
                 centerX - buttonWidth / 2,
-                centerY - buttonHeight / 2 - 30,
+                centerY - buttonHeight / 2 ,
                 buttonWidth,
                 buttonHeight
             ),
@@ -116,7 +116,7 @@ export class MainMenu extends Scene {
             restartButtonBg.fillStyle(0x888888, 1); // Darker color on hover
             restartButtonBg.fillRoundedRect(
                 centerX - buttonWidth / 2,
-                centerY - buttonHeight / 2 - 30,
+                centerY - buttonHeight / 2 ,
                 buttonWidth,
                 buttonHeight,
                 buttonRadius
@@ -127,7 +127,7 @@ export class MainMenu extends Scene {
             restartButtonBg.fillStyle(0xffffff, 1); // Original color
             restartButtonBg.fillRoundedRect(
                 centerX - buttonWidth / 2,
-                centerY - buttonHeight / 2 - 30,
+                centerY - buttonHeight / 2 ,
                 buttonWidth,
                 buttonHeight,
                 buttonRadius
