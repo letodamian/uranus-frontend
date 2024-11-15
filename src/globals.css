@@ -31,8 +31,17 @@
     height: 100%;
     overflow: hidden;
 }
+#game-container {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: flex-end;  /* Vertically align to the bottom */
+    height: 100vh;          /* Full viewport height */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
 
 canvas {
-    margin-bottom: 0 !important;
-    padding: 0;
+    display: block;
+    margin: 0;
 }
