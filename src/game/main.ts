@@ -4,12 +4,11 @@ import { MainMenu } from "./scenes/MainMenu";
 import { AUTO, Game } from "phaser";
 import { Preloader } from "./scenes/Preloader";
 
-
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config: Phaser.Types.Core.GameConfig = {
     type: AUTO,
-   
+
     parent: "game-container",
     backgroundColor: "#000000",
     physics: {
@@ -26,20 +25,19 @@ const config: Phaser.Types.Core.GameConfig = {
         mode: Phaser.Scale.FIT, // Scale to fit the screen while maintaining aspect ratio
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: window.innerWidth, // Calculate width based on screen height
-        height: window.innerHeight,              // Set initial height as screen height
-      },
+        height: window.innerHeight, // Set initial height as screen height
+    },
     scene: [Boot, Preloader, MainMenu, MainGame],
 };
 
 const StartGame = (parent: string) => {
-    //const parentElement = document.getElementById(parent);
+    const parentElement = document.getElementById(parent);
 
     // Use parent's dimensions, defaulting to config if unavailable
-    // const width = parentElement?.clientWidth || config.width;
-    // const height = parentElement?.clientHeight || config.height;
-     const width =  config.width;
-     const height =  config.height;
-     console.log("ratio:",config.scale?.mode)
+    const width = parentElement?.clientWidth || config.width;
+    const height = parentElement?.clientHeight || config.height;
+
+    console.log("ratio:", config.scale?.mode);
     return new Game({ ...config, parent, width, height });
 };
 
