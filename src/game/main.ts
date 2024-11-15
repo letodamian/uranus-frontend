@@ -4,7 +4,7 @@ import { MainMenu } from "./scenes/MainMenu";
 import { AUTO, Game } from "phaser";
 import { Preloader } from "./scenes/Preloader";
 const aspectWidth = 10;
-const aspectHeight = 16;
+const aspectHeight = 19;
 const aspectRatio = aspectWidth / aspectHeight;
 
 //  Find out more information about the Game Config at:
