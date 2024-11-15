@@ -35,10 +35,10 @@ export class MainMenu extends Scene {
         const centerX = this.scale.gameSize.width / 2;
         this.background = this.add.image(512, 300, "background");
         this.logo = this.add.image(196, 150, "logo").setDepth(100);
-        this.ringUranus = this.add.image(196, 500, "ring").setDepth(100);
+        this.ringUranus = this.add.image(196, 500, "ring").setDepth(10);
         this.ground = this.add
-            .image(centerX, centerY * 2, "ground")
-            .setScale(1, 2)
+            .image(centerX, centerY * 2 + 50, "ground")
+            .setScale(1, 1.5)
             .setDepth(100);
 
         this.title = this.add

@@ -43,7 +43,7 @@ export class Game extends Scene {
         this.background = this.add.image(512,300,"background");
 
         this.ground = this.physics.add.staticGroup();
-        this.ground.create(centerX, centerY * 2, "ground").setScale(1,2).refreshBody();
+        this.ground.create(centerX, centerY * 2 + 50, "ground").setScale(1,1.5).refreshBody();
 
         //setup main character
         this.uranus = this.physics.add.sprite(80, 300, "uranus");
@@ -119,12 +119,7 @@ export class Game extends Scene {
 
     //display change per frame
     update() {
-        EventBus.on("user-data-ready", async (userId: string | undefined) => {
-            const data = await getGameData(userId)
-            if(data){
-                this.energyCount = data.energy;
-            }
-            })
+
         if (this.gameOver) return;
 
         //Increase score over time
