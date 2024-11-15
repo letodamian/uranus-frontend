@@ -39,7 +39,7 @@ export class MainMenu extends Scene {
             .image(centerX, centerY + 90, "ring")
             .setDepth(10);
         this.ground = this.add
-            .image(centerX, centerY * 2 - 100, "ground")
+            .image(centerX, centerY * 2 - 90, "ground")
             .setDepth(100);
 
         this.title = this.add
@@ -81,7 +81,7 @@ export class MainMenu extends Scene {
         restartButtonBg.fillStyle(0xffffff, 1);
         restartButtonBg.fillRoundedRect(
             centerX - buttonWidth / 2,
-            centerY - buttonHeight / 2 + 20,
+            centerY - buttonHeight / 2 - 20,
             buttonWidth,
             buttonHeight,
             buttonRadius
@@ -89,7 +89,7 @@ export class MainMenu extends Scene {
 
         // Create the restart text on top of the button
         const restartButtonText = this.add
-            .text(centerX, centerY + 20, "START", {
+            .text(centerX, centerY - 20, "START", {
                 fontSize: "36px",
                 color: "#000",
                 fontFamily: "ArcadeClassic",
@@ -100,7 +100,7 @@ export class MainMenu extends Scene {
         restartButtonBg.setInteractive(
             new Phaser.Geom.Rectangle(
                 centerX - buttonWidth / 2,
-                centerY - buttonHeight / 2 + 20,
+                centerY - buttonHeight / 2 - 20,
                 buttonWidth,
                 buttonHeight
             ),
@@ -117,7 +117,7 @@ export class MainMenu extends Scene {
             restartButtonBg.fillStyle(0x888888, 1); // Darker color on hover
             restartButtonBg.fillRoundedRect(
                 centerX - buttonWidth / 2,
-                centerY - buttonHeight / 2 + 20,
+                centerY - buttonHeight / 2 - 20,
                 buttonWidth,
                 buttonHeight,
                 buttonRadius
@@ -128,7 +128,7 @@ export class MainMenu extends Scene {
             restartButtonBg.fillStyle(0xffffff, 1); // Original color
             restartButtonBg.fillRoundedRect(
                 centerX - buttonWidth / 2,
-                centerY - buttonHeight / 2 + 20,
+                centerY - buttonHeight / 2 - 20,
                 buttonWidth,
                 buttonHeight,
                 buttonRadius

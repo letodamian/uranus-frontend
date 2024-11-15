@@ -43,7 +43,7 @@ export class Game extends Scene {
         this.background = this.add.image(512,300,"background");
 
         this.ground = this.physics.add.staticGroup();
-        this.ground.create(centerX, centerY * 2 - 100, "ground").refreshBody();
+        this.ground.create(centerX, centerY * 2 - 90, "ground").refreshBody();
 
         //setup main character
         this.uranus = this.physics.add.sprite(80, 300, "uranus");
