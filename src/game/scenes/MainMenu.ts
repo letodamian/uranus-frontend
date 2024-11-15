@@ -38,7 +38,7 @@ export class MainMenu extends Scene {
         this.ringUranus = this.add.image(centerX, centerY + 130, "ring").setDepth(10);
         this.ground = this.add
             .image(centerX, centerY * 2 + 50, "ground")
-            .setScale(1, 1)
+          
             .setDepth(100);
 
         this.title = this.add
