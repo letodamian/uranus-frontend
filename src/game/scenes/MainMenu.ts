@@ -30,13 +30,12 @@ export class MainMenu extends Scene {
                 this.scoreCount = data.topScore;
             }
         });
-        console.log("width:", this.scale.gameSize.height);
         const centerY = this.scale.gameSize.height / 2;
         const centerX = this.scale.gameSize.width / 2;
         this.background = this.add.image(512, 300, "background");
         this.logo = this.add.image(centerX, 120, "logo").setDepth(100);
         this.ringUranus = this.add
-            .image(centerX, centerY + 90, "ring")
+            .image(centerX, centerY + 110, "ring")
             .setDepth(10);
         this.ground = this.add
             .image(centerX, centerY * 2 - 50, "ground")
@@ -81,7 +80,7 @@ export class MainMenu extends Scene {
         restartButtonBg.fillStyle(0xffffff, 1);
         restartButtonBg.fillRoundedRect(
             centerX - buttonWidth / 2,
-            centerY - buttonHeight / 2 - 60,
+            centerY - buttonHeight / 2 - 30,
             buttonWidth,
             buttonHeight,
             buttonRadius
@@ -89,7 +88,7 @@ export class MainMenu extends Scene {
 
         // Create the restart text on top of the button
         const restartButtonText = this.add
-            .text(centerX, centerY - 60, "START", {
+            .text(centerX, centerY - 30, "START", {
                 fontSize: "36px",
                 color: "#000",
                 fontFamily: "ArcadeClassic",
@@ -100,7 +99,7 @@ export class MainMenu extends Scene {
         restartButtonBg.setInteractive(
             new Phaser.Geom.Rectangle(
                 centerX - buttonWidth / 2,
-                centerY - buttonHeight / 2 - 60,
+                centerY - buttonHeight / 2 - 30,
                 buttonWidth,
                 buttonHeight
             ),
@@ -117,7 +116,7 @@ export class MainMenu extends Scene {
             restartButtonBg.fillStyle(0x888888, 1); // Darker color on hover
             restartButtonBg.fillRoundedRect(
                 centerX - buttonWidth / 2,
-                centerY - buttonHeight / 2 - 60,
+                centerY - buttonHeight / 2 - 30,
                 buttonWidth,
                 buttonHeight,
                 buttonRadius
@@ -128,7 +127,7 @@ export class MainMenu extends Scene {
             restartButtonBg.fillStyle(0xffffff, 1); // Original color
             restartButtonBg.fillRoundedRect(
                 centerX - buttonWidth / 2,
-                centerY - buttonHeight / 2 - 60,
+                centerY - buttonHeight / 2 - 30,
                 buttonWidth,
                 buttonHeight,
                 buttonRadius
