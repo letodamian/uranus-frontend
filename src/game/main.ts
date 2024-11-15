@@ -32,12 +32,13 @@ const config: Phaser.Types.Core.GameConfig = {
 };
 
 const StartGame = (parent: string) => {
-    const parentElement = document.getElementById(parent);
+    //const parentElement = document.getElementById(parent);
 
     // Use parent's dimensions, defaulting to config if unavailable
-    const width = parentElement?.clientWidth || config.width;
-    const height = parentElement?.clientHeight || config.height;
-
+    // const width = parentElement?.clientWidth || config.width;
+    // const height = parentElement?.clientHeight || config.height;
+     const width =  config.width;
+     const height =  config.height;
     return new Game({ ...config, parent, width, height });
 };
 
