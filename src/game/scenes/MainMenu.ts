@@ -35,16 +35,17 @@ export class MainMenu extends Scene {
         const centerX = this.scale.gameSize.width / 2;
         this.background = this.add.image(512, 300, "background");
         this.logo = this.add.image(196, 150, "logo").setDepth(100);
-        this.ringUranus = this.add.image(centerX, centerY + 130, "ring").setDepth(10);
+        this.ringUranus = this.add
+            .image(centerX, centerY + 90, "ring")
+            .setDepth(10);
         this.ground = this.add
-            .image(centerX, centerY * 2 + 50, "ground")
-          
+            .image(centerX, centerY * 2, "ground")
             .setDepth(100);
 
         this.title = this.add
-            .text(centerX, centerY - 70, "TOP SCORE", {
+            .text(centerX, centerY - 40, "TOP SCORE", {
                 fontFamily: "ArcadeClassic",
-                fontSize: 24,
+                fontSize: 36,
                 color: "#ffffff",
                 stroke: "#000000",
                 strokeThickness: 8,
