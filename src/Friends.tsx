@@ -11,6 +11,10 @@ import FriendPanel from "./components/Friendpanel";
 import SocialButton from "./components/SocialTask";
 import { useFetchRef } from "./hook/useFetchRef";
 
+interface Friend {
+
+}
+
 const Friends = () => {
     const { data, isLoading, refetch} = useFetchRef();
     const inviteCode = data?.inviteCode;
@@ -64,10 +68,10 @@ const Friends = () => {
                     </div>
                     <div>
                         <div className="m-2 row">
-                            {[1, 2, 3, 4, 5].map((index) => (
+                            {data?.friends.map((friend:string,index:number) => (
                                 <FriendPanel
                                     key={index}
-                                    userName="@USERNAME"
+                                    userName={friend}
                                 ></FriendPanel>
                             ))}
                         </div>
