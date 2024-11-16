@@ -20,7 +20,7 @@ const Friends = () => {
     const inviteCode = data?.inviteCode;
     const inviteLink = `https://t.me/UranusGameBot?start=${inviteCode}`;
     const [isGameOver, setIsGameOver] = useState(true);
-    const inviteCount = data?.freinds.length;
+    const inviteCount = data?.friends.length;
     const navigate = useNavigate();
     const phaserRef = useRef<IRefPhaserGame | null>(null);
 
