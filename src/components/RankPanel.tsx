@@ -15,7 +15,7 @@ const RankPanel = ({  ranking, userName, points }: RankPanelProps) => {
             </div>
             <div className="flex-1 flex justify-between text-center px-5 text-black">
                 <div className="skew-x-[30deg] text-xl">{userName}</div>
-                <div className="skew-x-[30deg] text-xl">{points}</div>
+                <div className="skew-x-[30deg] text-[24px]">{points}</div>
             </div>
         </div>
     );
