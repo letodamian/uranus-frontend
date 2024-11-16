@@ -6,8 +6,11 @@ import { IRefPhaserGame, PhaserGame } from "./game/PhaserGame";
 import { EventBus } from "./game/EventBus";
 
 import { useNavigate } from "react-router-dom";
+import { useFetchLeaderBoard } from "./hook/useFetchLeaderBoard";
 
 const Leaderboard = () => {
+    const {data, isLoading, refetch} = useFetchLeaderBoard();
+    console.log("lbdata:", data)
     const [isGameOver, setIsGameOver] = useState(true);
     const [isDaily, setIsDaily] = useState(0);
 

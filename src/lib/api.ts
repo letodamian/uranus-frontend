@@ -54,3 +54,26 @@ export const getGameData = async (userId: string | undefined) => {
         throw error; // Re-throw error for further handling if needed
     }
 };
+
+export const getLeaderBoardData = async (userId: string | undefined) => {
+    try {
+        const res = await axios.get(`${apiUrl}/user/userPoints`, {
+            params: { userId }, // Pass userId as a query parameter
+        });
+        return res.data; // Return the fetched data
+    } catch (error) {
+        console.error("Error fetching game data:", error);
+        throw error; // Re-throw error for further handling if needed
+    }
+};
+export const getRefData = async (userId: string | undefined) => {
+    try {
+        const res = await axios.get(`${apiUrl}/user/friend`, {
+            params: { userId }, // Pass userId as a query parameter
+        });
+        return res.data; // Return the fetched data
+    } catch (error) {
+        console.error("Error fetching game data:", error);
+        throw error; // Re-throw error for further handling if needed
+    }
+};
