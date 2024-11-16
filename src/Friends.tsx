@@ -48,9 +48,9 @@ const Friends = () => {
         };
     }, []);
     return (
-        <div className=" text-white max-w-sm h-full px-4 pb-4 pt-10 space-y-4 font-['ArcadeClassic']  bg-[url('/assets/background.jpeg')] bg-cover relative">
+        <div className=" text-white max-w-sm h-screen px-4 pb-4 pt-10 space-y-4 font-['ArcadeClassic']  bg-[url('/assets/background.jpeg')] bg-cover relative">
             {/* friends Section */}
-            <div className="h-full overflow-auto no-scrollbar">
+            <div className="h-screen overflow-auto no-scrollbar">
             <div className="flex flex-col pt-4 ">
                 <div className="text-3xl uppercase">friends</div>
                 <div className="text-2xl uppercase">
@@ -68,7 +68,7 @@ const Friends = () => {
                     </div>
                     <div>
                         <div className="m-2 row">
-                            {data?.friends.map((friend:string,index:number) => (
+                            {data?.friends?.map((friend:string,index:number) => (
                                 <FriendPanel
                                     key={index}
                                     userName={friend}
