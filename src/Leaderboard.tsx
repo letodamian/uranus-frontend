@@ -10,12 +10,12 @@ import { useFetchLeaderBoard } from "./hook/useFetchLeaderBoard";
 interface Rank {
     userName: string;
     points: number;
-  }
+}
 
 const Leaderboard = () => {
-    const {data, isLoading, refetch} = useFetchLeaderBoard();
-    const scoreLabel = ["totalScore", ]
-    console.log("lbdata:", data)
+    const { data, isLoading, refetch } = useFetchLeaderBoard();
+    const scoreLabel = ["totalScore"];
+    console.log("lbdata:", data);
     const [isGameOver, setIsGameOver] = useState(true);
     const [isDaily, setIsDaily] = useState(0);
 
@@ -57,10 +57,22 @@ const Leaderboard = () => {
                     <h2 className="text-2xl font-['ArcadeClassic']">
                         YOUR POINTS
                     </h2>
-                    <PointPanel label="TOTAL POINTS" points={data?.totalScore??0} />
-                    <PointPanel label="GAME POINTS" points={data?.gameScore??0} />
-                    <PointPanel label="REFERRAL POINTS" points={data?.refScore??0} />
-                    <PointPanel label="SOCIAL POINTS" points={data?.socialScore??0} />
+                    <PointPanel
+                        label="TOTAL POINTS"
+                        points={data?.totalScore ?? 0}
+                    />
+                    <PointPanel
+                        label="GAME POINTS"
+                        points={data?.gameScore ?? 0}
+                    />
+                    <PointPanel
+                        label="REFERRAL POINTS"
+                        points={data?.refScore ?? 0}
+                    />
+                    <PointPanel
+                        label="SOCIAL POINTS"
+                        points={data?.socialScore ?? 0}
+                    />
                 </div>
 
                 {/* Leaderboard Section */}
@@ -93,17 +105,25 @@ const Leaderboard = () => {
                         </button>
                     </div>
                     <div className="m-2 row">
-                        {data?.leaderBoard[isDaily].map((rank: Rank, index: number) => (
-                            <RankPanel
-                                key={index}
-                                ranking={index + 1}
-                                userName={rank.userName}
-                                points={rank.points}
-                            />
-                        ))}
+                        {data?.leaderBoard[isDaily].map(
+                            (rank: Rank, index: number) => (
+                                <RankPanel
+                                    key={index}
+                                    ranking={index + 1}
+                                    userName={rank.userName}
+                                    points={rank.points}
+                                />
+                            )
+                        )}
                     </div>
                     <p className="text-center text-lg mt-4">
-                        Your Position: Object.values(data.ranking)[isDaily+1] / {data.ranking.totalUsers}
+                        {data?.ranking && (
+                            <>
+                                Your Position:{" "}
+                                {Object.values(data.ranking)[isDaily + 1]} /{" "}
+                                {data.ranking.totalUsers}
+                            </>
+                        )}
                     </p>
                 </div>
             </div>
