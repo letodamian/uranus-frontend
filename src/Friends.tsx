@@ -9,12 +9,14 @@ import CopyToClipboard from "./components/copyToClipboard";
 import RankPanel from "./components/RankPanel";
 import FriendPanel from "./components/Friendpanel";
 import SocialButton from "./components/SocialTask";
+import { useFetchRef } from "./hook/useFetchRef";
 
 const Friends = () => {
-    const inviteCount = 5;
-    const inviteLink = "esd3dd";
+    const { data, isLoading, refetch} = useFetchRef();
+    const inviteCode = data?.inviteCode;
+    const inviteLink = `https://t.me/UranusGameBot?start=${inviteCode}`;
     const [isGameOver, setIsGameOver] = useState(true);
-
+    const inviteCount = data?.freinds.length;
     const navigate = useNavigate();
     const phaserRef = useRef<IRefPhaserGame | null>(null);
 
@@ -78,7 +80,7 @@ const Friends = () => {
                     </div>
                     <div>
                         <div className="m-2 row">
-                            <SocialButton
+                            {/* <SocialButton
                                 label="twitter"
                                 content="FOLLOW $URANUS"
                                 link="https://www.figma.com/design/hUr2pKa7rT4DqkdSB79uTn/URANUS?node-id=39-226&node-type=frame&t=vpRWTE5JwCNiOz3r-0"
@@ -87,16 +89,16 @@ const Friends = () => {
                                 label="twitter"
                                 content="FOLLOW ARES"
                                 link="abc"
-                            ></SocialButton>
+                            ></SocialButton> */}
                             <SocialButton
                                 label="telegram"
                                 content="JOIN COMMUNITY"
-                                link="abc"
+                                link="https://t.me/playuranus"
                             ></SocialButton>
                             <SocialButton
                                 label="telegram"
                                 content="JOIN CHANNEL"
-                                link="abc"
+                                link="https://t.me/play_uranus"
                             ></SocialButton>
                         </div>
                     </div>
