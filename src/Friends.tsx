@@ -48,10 +48,10 @@ const Friends = () => {
         };
     }, []);
     return (
-        <div className=" text-white max-w-sm h-screen px-4 pb-4 pt-10 space-y-4 font-['ArcadeClassic']  bg-[url('/assets/background.jpeg')] bg-cover relative">
+        <div className=" text-white w-full max-w-sm h-screen px-4 pb-16 pt-10 font-['ArcadeClassic']  bg-[url('/assets/background.jpeg')] bg-cover relative">
             {/* friends Section */}
-            <div className="h-screen overflow-scroll no-scrollbar">
-            <div className="flex flex-col pt-4 ">
+            <div className="h-full overflow-scroll no-scrollbar">
+            <div className="space-y-2">
                 <div className="text-3xl uppercase">friends</div>
                 <div className="text-2xl uppercase">
                     invite your friends and earn 10% of their points
