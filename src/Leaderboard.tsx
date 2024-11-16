@@ -82,7 +82,7 @@ const Leaderboard = () => {
                         <button
                             onClick={() => setIsDaily(1)}
                             className={`text-white ${
-                                isDaily === 0 ? "border-b-2" : ""
+                                isDaily === 1 ? "border-b-2" : ""
                             } border-white`}
                         >
                             Daily
@@ -90,7 +90,7 @@ const Leaderboard = () => {
                         <button
                             onClick={() => setIsDaily(2)}
                             className={`text-white ${
-                                isDaily === 1 ? "border-b-2" : ""
+                                isDaily === 2 ? "border-b-2" : ""
                             } border-white`}
                         >
                             Weekly
@@ -98,7 +98,7 @@ const Leaderboard = () => {
                         <button
                             onClick={() => setIsDaily(0)}
                             className={`text-white ${
-                                isDaily === 2 ? "border-b-2" : ""
+                                isDaily === 0 ? "border-b-2" : ""
                             } border-white`}
                         >
                             All Time
