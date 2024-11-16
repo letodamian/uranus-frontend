@@ -11,12 +11,10 @@ import FriendPanel from "./components/Friendpanel";
 import SocialButton from "./components/SocialTask";
 import { useFetchRef } from "./hook/useFetchRef";
 
-interface Friend {
-
-}
+interface Friend {}
 
 const Friends = () => {
-    const { data, isLoading, refetch} = useFetchRef();
+    const { data, isLoading, refetch } = useFetchRef();
     const inviteCode = data?.inviteCode;
     const inviteLink = `https://t.me/UranusGameBot?start=${inviteCode}`;
     const [isGameOver, setIsGameOver] = useState(true);
@@ -51,40 +49,40 @@ const Friends = () => {
         <div className=" text-white w-full max-w-sm h-screen px-4 pb-16 pt-10 font-['ArcadeClassic']  bg-[url('/assets/background.jpeg')] bg-cover relative">
             {/* friends Section */}
             <div className="h-full overflow-scroll no-scrollbar">
-            <div className="space-y-2">
-                <div className="text-3xl uppercase">friends</div>
-                <div className="text-2xl uppercase">
-                    invite your friends and earn 10% of their points
-                </div>
-                <div className="text-xl bg-[#151416] flex justify-center py-2 rounded-lg my-2">
-                    Invite Friends{" "}
-                    <span>
+                <div className="space-y-2">
+                    <div className="text-3xl uppercase">friends</div>
+                    <div className="text-2xl uppercase">
+                        invite your friends and earn 10% of their points
+                    </div>
+                    <div className="text-xl bg-[#151416] flex flex-col justify-center py-2 rounded-lg my-2">
+                        <div>Invite Friends</div>{" "}
                         <CopyToClipboard text={inviteLink} />
-                    </span>
-                </div>
-                <div>
-                    <div className="text-xl uppercase">
-                        invite:{inviteCount}friends
                     </div>
                     <div>
-                        <div className="m-2 row">
-                            {data?.friends?.map((friend:string,index:number) => (
-                                <FriendPanel
-                                    key={index}
-                                    userName={friend}
-                                ></FriendPanel>
-                            ))}
+                        <div className="text-xl uppercase">
+                            invite:{inviteCount}friends
+                        </div>
+                        <div>
+                            <div className="m-2 row">
+                                {data?.friends?.map(
+                                    (friend: string, index: number) => (
+                                        <FriendPanel
+                                            key={index}
+                                            userName={friend}
+                                        ></FriendPanel>
+                                    )
+                                )}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="pb-12">
-                    <div className="text-xl uppercase">Social task</div>
-                    <div className="text-xl uppercase">
-                        Earn +50 points per task
-                    </div>
-                    <div>
-                        <div className="m-2 row">
-                            {/* <SocialButton
+                    <div className="pb-12">
+                        <div className="text-xl uppercase">Social task</div>
+                        <div className="text-xl uppercase">
+                            Earn +50 points per task
+                        </div>
+                        <div>
+                            <div className="m-2 row">
+                                {/* <SocialButton
                                 label="twitter"
                                 content="FOLLOW $URANUS"
                                 link="https://www.figma.com/design/hUr2pKa7rT4DqkdSB79uTn/URANUS?node-id=39-226&node-type=frame&t=vpRWTE5JwCNiOz3r-0"
@@ -94,20 +92,20 @@ const Friends = () => {
                                 content="FOLLOW ARES"
                                 link="abc"
                             ></SocialButton> */}
-                            <SocialButton
-                                label="telegram"
-                                content="JOIN COMMUNITY"
-                                link="https://t.me/playuranus"
-                            ></SocialButton>
-                            <SocialButton
-                                label="telegram"
-                                content="JOIN CHANNEL"
-                                link="https://t.me/play_uranus"
-                            ></SocialButton>
+                                <SocialButton
+                                    label="telegram"
+                                    content="JOIN COMMUNITY"
+                                    link="https://t.me/playuranus"
+                                ></SocialButton>
+                                <SocialButton
+                                    label="telegram"
+                                    content="JOIN CHANNEL"
+                                    link="https://t.me/play_uranus"
+                                ></SocialButton>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
             {/* Footer Navigation */}
             <div className="absolute w-full bottom-2 left-0 flex justify-between p-4 gap-1">
