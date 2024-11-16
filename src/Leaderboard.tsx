@@ -7,9 +7,14 @@ import { EventBus } from "./game/EventBus";
 
 import { useNavigate } from "react-router-dom";
 import { useFetchLeaderBoard } from "./hook/useFetchLeaderBoard";
+interface Rank {
+    userName: string;
+    points: number;
+  }
 
 const Leaderboard = () => {
     const {data, isLoading, refetch} = useFetchLeaderBoard();
+    const scoreLabel = ["totalScore", ]
     console.log("lbdata:", data)
     const [isGameOver, setIsGameOver] = useState(true);
     const [isDaily, setIsDaily] = useState(0);
@@ -52,10 +57,10 @@ const Leaderboard = () => {
                     <h2 className="text-2xl font-['ArcadeClassic']">
                         YOUR POINTS
                     </h2>
-                    <PointPanel label="TOTAL POINTS" points={1200} />
-                    <PointPanel label="GAME POINTS" points={1200} />
-                    <PointPanel label="REFERRAL POINTS" points={200} />
-                    <PointPanel label="SOCIAL POINTS" points={200} />
+                    <PointPanel label="TOTAL POINTS" points={data?.totalScore??0} />
+                    <PointPanel label="GAME POINTS" points={data?.gameScore??0} />
+                    <PointPanel label="REFERRAL POINTS" points={data?.refScore??0} />
+                    <PointPanel label="SOCIAL POINTS" points={data?.socialScore??0} />
                 </div>
 
                 {/* Leaderboard Section */}
@@ -63,7 +68,7 @@ const Leaderboard = () => {
                     <h2 className="text-2xl">LEADERBOARD</h2>
                     <div className="flex justify-start space-x-4 text-lg mt-2 border-b border-gray-400 pb-2">
                         <button
-                            onClick={() => setIsDaily(0)}
+                            onClick={() => setIsDaily(1)}
                             className={`text-white ${
                                 isDaily === 0 ? "border-b-2" : ""
                             } border-white`}
@@ -71,7 +76,7 @@ const Leaderboard = () => {
                             Daily
                         </button>
                         <button
-                            onClick={() => setIsDaily(1)}
+                            onClick={() => setIsDaily(2)}
                             className={`text-white ${
                                 isDaily === 1 ? "border-b-2" : ""
                             } border-white`}
@@ -79,7 +84,7 @@ const Leaderboard = () => {
                             Weekly
                         </button>
                         <button
-                            onClick={() => setIsDaily(2)}
+                            onClick={() => setIsDaily(0)}
                             className={`text-white ${
                                 isDaily === 2 ? "border-b-2" : ""
                             } border-white`}
@@ -88,17 +93,17 @@ const Leaderboard = () => {
                         </button>
                     </div>
                     <div className="m-2 row">
-                        {[1, 2, 3, 4, 5, 6].map((rank, index) => (
+                        {data?.leaderBoard[isDaily].map((rank: Rank, index: number) => (
                             <RankPanel
                                 key={index}
                                 ranking={index + 1}
-                                userName="username"
-                                points={200}
+                                userName={rank.userName}
+                                points={rank.points}
                             />
                         ))}
                     </div>
                     <p className="text-center text-lg mt-4">
-                        Your Position: 40 / 120000
+                        Your Position: Object.values(data.ranking)[isDaily+1] / {data.ranking.totalUsers}
                     </p>
                 </div>
             </div>
