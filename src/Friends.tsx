@@ -22,7 +22,7 @@ const Friends = () => {
     const navigate = useNavigate();
     const phaserRef = useRef<IRefPhaserGame | null>(null);
     const inviteFriends = () => {
-        const link = `https://t.me/share/url?url =${inviteLink}`
+        const link = `https://t.me/share/url?url=https://github.com/Eronred/Programming-Books-App`
         window.open(link, "_blank", 'popup,width=600,height=500,noopener,noreferrer');
     }
     const goToHome = () => {
