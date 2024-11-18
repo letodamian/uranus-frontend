@@ -22,7 +22,8 @@ const Friends = () => {
     const navigate = useNavigate();
     const phaserRef = useRef<IRefPhaserGame | null>(null);
     const inviteFriends = () => {
-        navigate(`https://t.me/share/url?url =${inviteLink}`)
+        const link = `https://t.me/share/url?url =${inviteLink}`
+        window.open(link, "_blank", "noopener,noreferrer");
     }
     const goToHome = () => {
         navigate("/");
