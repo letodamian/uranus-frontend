@@ -17,6 +17,8 @@ const Friends = () => {
     const { data, isLoading, refetch } = useFetchRef();
     const inviteCode = data?.inviteCode;
     const inviteLink = `https://t.me/UranusGameBot?start=${inviteCode}`;
+    const link = `https://t.me/share/url?url=${encodeURIComponent(inviteLink)}`
+
     const [isGameOver, setIsGameOver] = useState(true);
     const inviteCount = data?.friends?.length ?? 0;
     const navigate = useNavigate();
@@ -58,7 +60,7 @@ const Friends = () => {
                         invite your friends and earn 10% of their points
                     </div>
                     <div className="text-xl bg-[#151416] flex flex-col justify-center py-2 rounded-lg my-2">
-                        <div onClick={inviteFriends}>Invite Friends</div>{" "}
+                        <a href={link}>Invite Friends</a>{" "}
                         <CopyToClipboard text={inviteLink} />
                     </div>
                     <div>
