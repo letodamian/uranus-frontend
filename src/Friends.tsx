@@ -66,7 +66,7 @@ const Friends = () => {
                         invite your friends and earn 10% of their points
                     </div>
                     <div className="text-xl bg-[#151416] flex flex-col justify-center py-2 rounded-lg my-2">
-                        <a href={link} target="_blank">Invite Friends</a>{" "}
+                        <a href={link} target="_top">Invite Friends</a>{" "}
                     </div>
                     <div>
                         <div className="text-xl uppercase">
