@@ -23,7 +23,7 @@ const Friends = () => {
     const phaserRef = useRef<IRefPhaserGame | null>(null);
     const inviteFriends = () => {
         const link = `https://t.me/share/url?url=${encodeURIComponent(inviteLink)}`
-        window.open(link, "_parent", 'popup,width=600,height=500,noopener,noreferrer');
+        window.open(link, "_self", 'popup,width=600,height=500,noopener,noreferrer');
     }
     const goToHome = () => {
         navigate("/");
