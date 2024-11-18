@@ -21,7 +21,9 @@ const Friends = () => {
     const inviteCount = data?.friends?.length ?? 0;
     const navigate = useNavigate();
     const phaserRef = useRef<IRefPhaserGame | null>(null);
-
+    const inviteFriends = () => {
+        navigate(`https://t.me/share/url?url =${inviteLink}`)
+    }
     const goToHome = () => {
         navigate("/");
     };
@@ -55,7 +57,7 @@ const Friends = () => {
                         invite your friends and earn 10% of their points
                     </div>
                     <div className="text-xl bg-[#151416] flex flex-col justify-center py-2 rounded-lg my-2">
-                        <div>Invite Friends</div>{" "}
+                        <div onClick={inviteFriends}>Invite Friends</div>{" "}
                         <CopyToClipboard text={inviteLink} />
                     </div>
                     <div>
