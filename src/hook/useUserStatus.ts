@@ -8,6 +8,6 @@ export const useUserStatus = (userId: string | undefined) => {
     refetchInterval: 5000,
     enabled: !!userId, // Only fetch if 'userName' is defined (truthy)
   });
-  console.log(data,"g");
+  console.log(data,"GGGGGGGGGGGGGGDCS");
   return { data, isLoading, refetch };
 };
