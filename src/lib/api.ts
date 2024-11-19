@@ -2,11 +2,10 @@ import axios from "axios";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
-export const fetchUserData = async (userName: string, userId: string) => {
+export const fetchUserStatus = async (userId: string | undefined) => {
     try {
-        const res = await axios.post(`${apiUrl}/user/Data`, {
-            userName,
-            userId,
+        const res = await axios.get(`${apiUrl}/user/status`, {
+            params: userId,
         });
         if (res.data.success) {
             return res.data;
