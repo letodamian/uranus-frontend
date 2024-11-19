@@ -7,6 +7,7 @@ export const fetchUserStatus = async (userId: string | undefined) => {
         const res = await axios.get(`${apiUrl}/user/status`, {
             params: userId,
         });
+        console.log(res.data, "GGGGGGGGGGGGGGDCS")
         if (res.data.success) {
             return res.data;
         } else {
