@@ -88,17 +88,17 @@ const Leaderboard = () => {
                             All Time
                         </button>
                         <button
-                            onClick={() => setIsDaily(2)}
+                            onClick={() => setIsDaily(1)}
                             className={`text-white ${
-                                isDaily === 2 ? "border-b-2" : ""
+                                isDaily === 1 ? "border-b-2" : ""
                             } border-white`}
                         >
                             Daily
                         </button>
                         <button
-                            onClick={() => setIsDaily(1)}
+                            onClick={() => setIsDaily(2)}
                             className={`text-white ${
-                                isDaily === 1 ? "border-b-2" : ""
+                                isDaily === 2 ? "border-b-2" : ""
                             } border-white`}
                         >
                             Weekly
