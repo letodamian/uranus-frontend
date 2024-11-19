@@ -5,9 +5,12 @@ const apiUrl = import.meta.env.VITE_API_URL;
 export const fetchUserStatus = async (userId: string | undefined) => {
     try {
         const res = await axios.get(`${apiUrl}/user/status`, {
-            params: userId,
+            params: { userId },
         });
-        console.log({data:res.data, url: `${apiUrl}/user/status`}, "GGGGGGGGGGGGGGDCS")
+        console.log(
+            { data: res.data, url: `${apiUrl}/user/status` },
+            "GGGGGGGGGGGGGGDCS"
+        );
         if (res.data.success) {
             return res.data;
         } else {
