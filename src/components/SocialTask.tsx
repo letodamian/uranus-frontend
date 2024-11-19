@@ -2,7 +2,6 @@
 //import React from "react";
 // Import Material Design Icons from react-icons
 import { FaTelegramPlane, FaTwitter } from "react-icons/fa";
-import { useUser } from "../hook/useUser";
 import { useUserStatus } from "../hook/useUserStatus";
 
 interface SocialButtonProps {
@@ -11,9 +10,8 @@ interface SocialButtonProps {
     content: string;
 }
 const SocialButton = ({ label, link, content }: SocialButtonProps) => {
-    const user = useUser();
-    const {data, isLoading, refetch} = useUserStatus(user?.userId);
-
+    const {data, isLoading, refetch} = useUserStatus();
+    console.log(data,"gggggggggg")
     // Handle button click to navigate to the link
     const handleButtonClick = () => {
         window.open(link, "_blank", "noopener,noreferrer");

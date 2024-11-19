@@ -1,13 +1,17 @@
+
 import { useQuery } from "@tanstack/react-query";
 import { fetchUserStatus } from "../lib/api";
+import { useUser } from "./useUser";
 
-export const useUserStatus = (userId: string | undefined) => {
-  const { data, isLoading, refetch } = useQuery({
-    queryKey: ["fetchUserStatus", userId],
-    queryFn: () => fetchUserStatus(userId),
-    refetchInterval: 5000,
-    enabled: !!userId, // Only fetch if 'userName' is defined (truthy)
-  });
-  console.log(data,"GGGGGGGGGGGGGGDCS");
-  return { data, isLoading, refetch };
-};
+export const useUserStatus = () => {
+    const user = useUser();
+    const { data, isLoading, refetch } = useQuery({
+        queryKey: ['fetchUserStatus', user?.userId],
+        queryFn: () => fetchUserStatus(user?.userId),
+        refetchInterval: 1000
+    })
+
+    return {
+        data, isLoading, refetch
+    }
+}
