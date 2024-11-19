@@ -11,8 +11,8 @@ interface SocialButtonProps {
 }
 const SocialButton = ({ label, link, content }: SocialButtonProps) => {
     const user = useUser();
-    const data = useUserStatus(user?.userId);
-    console.log(data.data,"ggg")
+    const {data, isLoading, refetch} = useUserStatus(user?.userId);
+    console.log(data,"ggg")
     // Handle button click to navigate to the link
     const handleButtonClick = () => {
         window.open(link, "_blank", "noopener,noreferrer");
