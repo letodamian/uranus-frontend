@@ -103,12 +103,12 @@ const Friends = () => {
                                 link="abc"
                             ></SocialButton> */}
                                 <SocialButton
-                                    label="telegram"
+                                    label="community"
                                     content="JOIN COMMUNITY"
                                     link="https://t.me/playuranus"
                                 ></SocialButton>
                                 <SocialButton
-                                    label="telegram"
+                                    label="channel"
                                     content="JOIN CHANNEL"
                                     link="https://t.me/play_uranus"
                                 ></SocialButton>

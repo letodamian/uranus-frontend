@@ -76,3 +76,15 @@ export const getRefData = async (userId: string | undefined) => {
         throw error; // Re-throw error for further handling if needed
     }
 };
+
+export const getSocialPoints = async (userId: string | undefined, socialType: string | undefined) => {
+    try {
+        const res = await axios.get(`${apiUrl}/user/getSocialPoints`,{
+            params: { userId, socialType}
+        });
+        return res.data;
+    }catch(error){
+        console.log(error);
+        return false;
+    }
+}
