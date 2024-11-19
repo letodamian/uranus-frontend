@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 //import React from "react";
 // Import Material Design Icons from react-icons
 import { FaTelegramPlane, FaTwitter } from "react-icons/fa";
@@ -12,7 +13,7 @@ interface SocialButtonProps {
 const SocialButton = ({ label, link, content }: SocialButtonProps) => {
     const user = useUser();
     const {data, isLoading, refetch} = useUserStatus(user?.userId);
-    console.log(data.joinedChannel,"ggg")
+    console.log(data.joinedChannel,"gggg")
     // Handle button click to navigate to the link
     const handleButtonClick = () => {
         window.open(link, "_blank", "noopener,noreferrer");
