@@ -10,8 +10,8 @@ interface SocialButtonProps {
     content: string;
 }
 const SocialButton = ({ label, link, content }: SocialButtonProps) => {
-    const {data, isLoading, refetch} = useUserStatus();
-    console.log(data,"gggggggggg")
+    const { data, isLoading, refetch } = useUserStatus();
+    console.log(data.data, "gggggggggg");
     // Handle button click to navigate to the link
     const handleButtonClick = () => {
         window.open(link, "_blank", "noopener,noreferrer");
@@ -32,11 +32,7 @@ const SocialButton = ({ label, link, content }: SocialButtonProps) => {
                     onClick={handleButtonClick}
                     className="flex items-center space-x-2 py-2 px-4 bg-[rgba(255,255,255,0.4)] text-white rounded-xl"
                 >
-                    {label === "twitter" ? (
-                        <span>Follow</span>
-                    ) : (
-                        <span>Join</span>
-                    )}
+                    <span>Join</span>
                 </button>
             </div>
         </div>
