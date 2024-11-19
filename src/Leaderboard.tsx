@@ -80,6 +80,14 @@ const Leaderboard = () => {
                     <h2 className="text-2xl">LEADERBOARD</h2>
                     <div className="flex justify-start space-x-4 text-lg mt-2 border-b border-gray-400 pb-2">
                         <button
+                            onClick={() => setIsDaily(0)}
+                            className={`text-white ${
+                                isDaily === 0 ? "border-b-2" : ""
+                            } border-white`}
+                        >
+                            All Time
+                        </button>
+                        <button
                             onClick={() => setIsDaily(1)}
                             className={`text-white ${
                                 isDaily === 1 ? "border-b-2" : ""
@@ -94,14 +102,6 @@ const Leaderboard = () => {
                             } border-white`}
                         >
                             Weekly
-                        </button>
-                        <button
-                            onClick={() => setIsDaily(0)}
-                            className={`text-white ${
-                                isDaily === 0 ? "border-b-2" : ""
-                            } border-white`}
-                        >
-                            All Time
                         </button>
                     </div>
                     <div className="m-2 row">
