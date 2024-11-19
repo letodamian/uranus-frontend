@@ -11,7 +11,7 @@ interface SocialButtonProps {
 }
 const SocialButton = ({ label, link, content }: SocialButtonProps) => {
     const { data, isLoading, refetch } = useUserStatus();
-    console.log(data, "gggggggggg");
+    console.log(data?.data, "gggggggggg");
     // Handle button click to navigate to the link
     const handleButtonClick = () => {
         window.open(link, "_blank", "noopener,noreferrer");
