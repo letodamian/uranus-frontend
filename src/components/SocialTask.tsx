@@ -5,7 +5,7 @@ import { FaTelegramPlane, FaTwitter } from "react-icons/fa";
 import { useUserStatus } from "../hook/useUserStatus";
 import { useUser } from "../hook/useUser";
 import { getSocialPoints } from "../lib/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface SocialButtonProps {
     label: string;
@@ -30,37 +30,40 @@ const SocialButton = ({ label, link, content }: SocialButtonProps) => {
     const handleCompleted = () => {
         return true;
     };
-    if (data) {
-        if (label === "community") {
-            if (data.data.joinedCommunity == false) {
-                setText("Join");
-                setState(0);
-            } else if (data.data.claimCommunity == false) {
-                setText("Claim");
-                setState(1);
-            } else {
-                setText("Completed");
-                setState(2);
-            }
-        }
-        if (label === "channel") {
-            if (data.data.joinedChannel == false) {
-                setText("Join");
-                setState(0);
-            } else if (data.data.claimChannelPoints == false) {
-                setText("Claim");
-                setState(1);
-            } else {
-                setText("Completed");
-                setState(2);
-            }
-        }
-    }
     const getHandleClick = () => {
         if (state == 0) return handleButtonClick();
         if (state == 1) return handleClaim();
         if (state == 2) return handleCompleted();
     };
+    useEffect(() => {
+        if (data) {
+            if (label === "community") {
+                if (data.data.joinedCommunity === false) {
+                    setText("Join");
+                    setState(0);
+                } else if (data.data.claimCommunity === false) {
+                    setText("Claim");
+                    setState(1);
+                } else {
+                    setText("Completed");
+                    setState(2);
+                }
+            }
+            if (label === "channel") {
+                if (data.data.joinedChannel === false) {
+                    setText("Join");
+                    setState(0);
+                } else if (data.data.claimChannelPoints === false) {
+                    setText("Claim");
+                    setState(1);
+                } else {
+                    setText("Completed");
+                    setState(2);
+                }
+            }
+        }
+    }, [data, label]);
+
     return (
         <div className="w-max-[400px] flex items-center bg-[#575757] rounded-lg my-2 p-3">
             <div className="bg-[rgba(255,255,255,0.3)] rounded-full h-10 w-10 flex justify-center items-center">
