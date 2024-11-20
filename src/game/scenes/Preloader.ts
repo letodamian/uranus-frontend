@@ -37,6 +37,7 @@ export class Preloader extends Scene {
         this.load.image("flame2", "flame2.png");
         this.load.image("flame3", "flame3.png");
         this.load.image("flame4", "flame4.png");
+        this.load.image("flame5", "flame5.png");
         this.load.image("energy", "energy.png")
 
         console.log("successfully load")

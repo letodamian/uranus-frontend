@@ -90,7 +90,6 @@ export class Game extends Scene {
         //add randomly appearing meteos
         this.meteos = this.physics.add.group();
         this.flames = this.physics.add.group();
-
         this.time.addEvent({
             delay: this.meteoSpawnInterval,
             callback: this.addMeteo,
@@ -190,7 +189,15 @@ export class Game extends Scene {
             `flame${flameType}`
         );
 
-        //
+        flame.setScale(0.2, 0.2); // Scale down to 50% of its original size
+        // Alternatively, use different values for width and height:
+        // flame.setScale(0.5, 0.8); // Width scaled to 50%, height to 80%
+
+        // Adjust the physics body size to match the scaled sprite
+        flame.body.setSize(
+            flame.width * flame.scaleX,
+            flame.height * flame.scaleY
+        );
         flame.body.setSize(flame.width, flame.height / 2); // Width and height for the ellipse
         flame.body.setOffset(-flame.width / 2, -flame.height / 4); // Adjust offset to center the body
 
