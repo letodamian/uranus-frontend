@@ -8,11 +8,13 @@ export class Game extends Scene {
     background: Phaser.GameObjects.Image;
     uranus: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
     ground: Phaser.Physics.Arcade.StaticGroup;
-    meteo: Phaser.Physics.Arcade.StaticGroup;
+    flames: Phaser.Physics.Arcade.Group;
     meteos: Phaser.Physics.Arcade.Group;
     gameOver = false;
     meteoSpeedBase: number;
     meteoSpawnInterval: number;
+    flameSpeedBase: number;
+    flameSpawnInterval: number;
     energyText: Phaser.GameObjects.Text;
     energy: Phaser.GameObjects.Image;
     energyCount = 100;
@@ -28,19 +30,21 @@ export class Game extends Scene {
         const centerY = this.scale.gameSize.height / 2;
         const centerX = this.scale.gameSize.width / 2;
         EventBus.on("user-data-ready", async (userId: string | undefined) => {
-            const data = await getGameData(userId)
-            if(data){
+            const data = await getGameData(userId);
+            if (data) {
                 this.energyCount = data.energy;
             }
-            })
+        });
         this.gameOver = false;
         this.score = 0;
         this.meteoSpawnInterval = 1500;
         this.meteoSpeedBase = 200;
+        this.flameSpawnInterval = 7500;
+        this.flameSpeedBase = 300;
         //set background Iamge
 
         //setup ground
-        this.background = this.add.image(512,300,"background");
+        this.background = this.add.image(512, 300, "background");
 
         this.ground = this.physics.add.staticGroup();
         this.ground.create(centerX, centerY * 2 - 50, "ground").refreshBody();
@@ -67,11 +71,13 @@ export class Game extends Scene {
         ); // Centering the circular body
 
         //display score according to time
-        this.scoreText = this.add.text(196, 120, "0", {
-            fontFamily: "ArcadeClassic",
-            fontSize: "64px",
-            color: "#fff",
-        }).setOrigin(0.5);
+        this.scoreText = this.add
+            .text(196, 120, "0", {
+                fontFamily: "ArcadeClassic",
+                fontSize: "64px",
+                color: "#fff",
+            })
+            .setOrigin(0.5);
 
         //display remaining energy
         this.energy = this.add.image(300, 30, "energy");
@@ -83,6 +89,7 @@ export class Game extends Scene {
 
         //add randomly appearing meteos
         this.meteos = this.physics.add.group();
+        this.flames = this.physics.add.group();
 
         this.time.addEvent({
             delay: this.meteoSpawnInterval,
@@ -91,10 +98,24 @@ export class Game extends Scene {
             loop: true,
         });
 
+        this.time.addEvent({
+            delay: this.flameSpawnInterval,
+            callback: this.addFlame,
+            callbackScope: this,
+            loop: true,
+        });
+
         //add collider event to ground and meteos
         this.physics.add.collider(
             this.uranus,
             this.meteos,
+            this.gameOverHandler,
+            undefined,
+            this
+        );
+        this.physics.add.collider(
+            this.uranus,
+            this.flames,
             this.gameOverHandler,
             undefined,
             this
@@ -119,14 +140,11 @@ export class Game extends Scene {
 
     //display change per frame
     update() {
-
         if (this.gameOver) return;
 
         //Increase score over time
         this.score++;
-        this.scoreText.setText(
-            `${Phaser.Math.FloorTo(this.score / 30)}`
-        );
+        this.scoreText.setText(`${Phaser.Math.FloorTo(this.score / 30)}`);
     }
 
     //uranus jump function on mouse click
@@ -163,6 +181,37 @@ export class Game extends Scene {
         meteo.checkWorldBounds = true;
         meteo.outOfBoundsKill = true;
     }
+    addFlame() {
+        if (this.gameOver) return;
+        const flameType = Phaser.Math.Between(1, 5);
+        const flame = this.flames.create(
+            900,
+            Phaser.Math.Between(150, 550),
+            `flame${flameType}`
+        );
+
+        //
+        flame.body.setSize(flame.width, flame.height / 2); // Width and height for the ellipse
+        flame.body.setOffset(-flame.width / 2, -flame.height / 4); // Adjust offset to center the body
+
+        // Making the flame interactive with an ellipse
+        flame.setInteractive(
+            new Phaser.Geom.Ellipse(
+                flame.width / 2, // Center X of the ellipse
+                flame.height / 2, // Center Y of the ellipse
+                flame.width, // Width of the ellipse
+                flame.height / 2 // Height of the ellipse
+            ),
+            Phaser.Geom.Ellipse.Contains
+        );
+        const flameSpacing = 300;
+        const lastflame = this.flames.getLast(true);
+        const startX = lastflame ? lastflame.x + flameSpacing : 800;
+        flame.setVelocityX(-200 - this.score * 0.4);
+
+        flame.checkWorldBounds = true;
+        flame.outOfBoundsKill = true;
+    }
 
     //game over function
     gameOverHandler() {
@@ -172,24 +221,28 @@ export class Game extends Scene {
 
         //when uranus die, decrease energy by 1
         EventBus.on("user-data-ready", async (userId: string | undefined) => {
-            const data = await getGameData(userId)
-            if(data){
+            const data = await getGameData(userId);
+            if (data) {
                 this.energyCount = data.energy;
                 this.highScore = data.topScore;
             }
-            })
+        });
         this.energyText.setText(`${this.energyCount}`);
 
-        this.add.text(196, 240, "HIGH SCORE", {
-            fontFamily: "ArcadeClassic",
-            fontSize: "36px",
-            color: "#fff",
-        }).setOrigin(0.5);
-        this.add.text(196, 320, `${this.highScore}`, {
-            fontFamily: "ArcadeClassic",
-            fontSize: "48px",
-            color: "#fff",
-        }).setOrigin(0.5);
+        this.add
+            .text(196, 240, "HIGH SCORE", {
+                fontFamily: "ArcadeClassic",
+                fontSize: "36px",
+                color: "#fff",
+            })
+            .setOrigin(0.5);
+        this.add
+            .text(196, 320, `${this.highScore}`, {
+                fontFamily: "ArcadeClassic",
+                fontSize: "48px",
+                color: "#fff",
+            })
+            .setOrigin(0.5);
 
         //display restart button
         const buttonWidth = 200;
@@ -229,8 +282,7 @@ export class Game extends Scene {
             this.scene.restart(); // Restart the scene
             this.gameOver = false;
             this.score = 0;
-        EventBus.emit("game-play");
-
+            EventBus.emit("game-play");
         });
 
         // Optional: Add hover effect
