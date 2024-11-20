@@ -17,6 +17,9 @@ export class Game extends Scene {
     ringSpawnInterval: number;
     flameSpeedBase: number;
     flameSpawnInterval: number;
+    boostingButton: Phaser.GameObjects.Graphics;
+    boostingButtonText: Phaser.GameObjects.Text;
+    boostTimer: Phaser.Time.TimerEvent;
     energyText: Phaser.GameObjects.Text;
     energy: Phaser.GameObjects.Image;
     energyCount = 100;
@@ -24,7 +27,7 @@ export class Game extends Scene {
     score = 0;
     highScore = 0;
     gameOver = false;
-
+    boostingActive = false;
 
     constructor() {
         super("Game");
@@ -143,6 +146,14 @@ export class Game extends Scene {
             this
         );
 
+        this.physics.add.overlap(
+            this.uranus,
+            this.ring,
+            this.collectRing,
+            undefined,
+            this
+        );
+
         EventBus.emit("current-scene-ready", this);
     }
 
@@ -165,7 +176,85 @@ export class Game extends Scene {
     jump() {
         this.uranus.setVelocityY(-250);
     }
+    collectRing() {
+        // Destroy the ring
+        this.ring.destroy();
 
+        // Show the Boosting button
+        if (!this.boostingButton) {
+            this.createBoostingButton();
+        } else {
+            this.boostingButton.setVisible(true);
+            this.boostingButtonText.setVisible(true);
+        }
+    }
+    createBoostingButton() {
+        const buttonWidth = 200;
+        const buttonHeight = 50;
+        const buttonRadius = 10;
+        const centerX = this.scale.gameSize.width / 2;
+
+        // Button background
+        this.boostingButton = this.add.graphics();
+        this.boostingButton.fillStyle(0x00ff00, 1); // Green button
+        this.boostingButton.fillRoundedRect(
+            centerX - buttonWidth / 2,
+            this.scale.gameSize.height - 100,
+            buttonWidth,
+            buttonHeight,
+            buttonRadius
+        );
+
+        // Button text
+        this.boostingButtonText = this.add
+            .text(centerX, this.scale.gameSize.height - 75, "BOOSTING", {
+                fontSize: "24px",
+                color: "#000",
+                fontFamily: "ArcadeClassic",
+            })
+            .setOrigin(0.5);
+
+        // Make the button interactive
+        this.boostingButton.setInteractive(
+            new Phaser.Geom.Rectangle(
+                centerX - buttonWidth / 2,
+                this.scale.gameSize.height - 100,
+                buttonWidth,
+                buttonHeight
+            ),
+            Phaser.Geom.Rectangle.Contains
+        );
+
+        // Handle button click
+        this.boostingButton.on("pointerdown", this.activateBoosting, this);
+
+        // Initially hide the button
+        this.boostingButton.setVisible(false);
+        this.boostingButtonText.setVisible(false);
+    }
+
+    activateBoosting() {
+        // Hide the Boosting button
+        this.boostingButton.setVisible(false);
+        this.boostingButtonText.setVisible(false);
+
+        // Make uranus invincible
+        this.boostingActive = true;
+        this.uranus.setTexture("ringUranus");
+        this.uranus.clearTint(); // Clear any tint applied during Game Over
+
+        // Set a timer to disable invincibility after 30 seconds
+        this.boostTimer = this.time.addEvent({
+            delay: 30000, // 30 seconds
+            callback: this.deactivateBoosting,
+            callbackScope: this,
+        });
+    }
+
+    deactivateBoosting() {
+        this.boostingActive = false;
+        this.uranus.setTexture("uranus"); // Replace with your normal image key
+    }
     //adding random meteos
     addMeteo() {
         if (this.gameOver) return;
@@ -237,18 +326,18 @@ export class Game extends Scene {
 
     addRing() {
         if (this.gameOver) return;
-    
+
         // Create the ring
         const ring = this.ring.create(
             900,
             Phaser.Math.Between(150, 550), // Random vertical position
             "ring" // Single ring type
         );
-    
+
         // Set the circular physics body
         ring.body.setCircle(ring.width / 2);
         ring.body.setOffset(-ring.width / 4, -ring.height / 4); // Center the body
-    
+
         // Make the ring interactive with a circular hit area
         ring.setInteractive(
             new Phaser.Geom.Circle(
@@ -258,10 +347,10 @@ export class Game extends Scene {
             ),
             Phaser.Geom.Circle.Contains
         );
-    
+
         // Set the horizontal velocity for the ring
         ring.setVelocityX(-200 - this.score * 0.4);
-    
+
         // Remove the ring when it goes out of bounds
         ring.checkWorldBounds = true;
         ring.outOfBoundsKill = true;
@@ -269,6 +358,10 @@ export class Game extends Scene {
 
     //game over function
     gameOverHandler() {
+        if (this.boostingActive) {
+            // Ignore collision if boosting is active
+            return;
+        }
         this.gameOver = true;
         this.uranus.setTint(0xff0000);
         this.physics.pause();
