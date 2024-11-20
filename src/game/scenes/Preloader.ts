@@ -27,7 +27,8 @@ export class Preloader extends Scene {
         this.load.setPath("assets");
 
         this.load.image("logo", "title.png");
-        this.load.image("ring", "ring.png")
+        this.load.image("ringUranus", "ringUranus.png");
+        this.load.image("ring", "ring.png");
         this.load.image("uranus", "uranus.png");
         this.load.image("meteo1", "meteo1.png");
         this.load.image("meteo2", "meteo2.png");
@@ -38,7 +39,7 @@ export class Preloader extends Scene {
         this.load.image("flame3", "flame3.png");
         this.load.image("flame4", "flame4.png");
         this.load.image("flame5", "flame5.png");
-        this.load.image("energy", "energy.png")
+        this.load.image("energy", "energy.png");
 
         console.log("successfully load")
     }

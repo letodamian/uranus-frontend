@@ -10,9 +10,11 @@ export class Game extends Scene {
     ground: Phaser.Physics.Arcade.StaticGroup;
     flames: Phaser.Physics.Arcade.Group;
     meteos: Phaser.Physics.Arcade.Group;
-    gameOver = false;
+    ring: Phaser.Physics.Arcade.Group;
     meteoSpeedBase: number;
     meteoSpawnInterval: number;
+    ringSpeedBase: number;
+    ringSpawnInterval: number;
     flameSpeedBase: number;
     flameSpawnInterval: number;
     energyText: Phaser.GameObjects.Text;
@@ -21,6 +23,8 @@ export class Game extends Scene {
     scoreText: Phaser.GameObjects.Text;
     score = 0;
     highScore = 0;
+    gameOver = false;
+
 
     constructor() {
         super("Game");
@@ -40,6 +44,8 @@ export class Game extends Scene {
         this.meteoSpawnInterval = 1500;
         this.meteoSpeedBase = 200;
         this.flameSpawnInterval = 7500;
+        this.flameSpeedBase = 300;
+        this.flameSpawnInterval = 2500;
         this.flameSpeedBase = 300;
         //set background Iamge
 
@@ -90,6 +96,8 @@ export class Game extends Scene {
         //add randomly appearing meteos
         this.meteos = this.physics.add.group();
         this.flames = this.physics.add.group();
+        this.ring = this.physics.add.group();
+
         this.time.addEvent({
             delay: this.meteoSpawnInterval,
             callback: this.addMeteo,
@@ -100,6 +108,13 @@ export class Game extends Scene {
         this.time.addEvent({
             delay: this.flameSpawnInterval,
             callback: this.addFlame,
+            callbackScope: this,
+            loop: true,
+        });
+
+        this.time.addEvent({
+            delay: this.ringSpawnInterval,
+            callback: this.addRing,
             callbackScope: this,
             loop: true,
         });
@@ -218,6 +233,38 @@ export class Game extends Scene {
 
         flame.checkWorldBounds = true;
         flame.outOfBoundsKill = true;
+    }
+
+    addRing() {
+        if (this.gameOver) return;
+    
+        // Create the ring
+        const ring = this.ring.create(
+            900,
+            Phaser.Math.Between(150, 550), // Random vertical position
+            "ring" // Single ring type
+        );
+    
+        // Set the circular physics body
+        ring.body.setCircle(ring.width / 2);
+        ring.body.setOffset(-ring.width / 4, -ring.height / 4); // Center the body
+    
+        // Make the ring interactive with a circular hit area
+        ring.setInteractive(
+            new Phaser.Geom.Circle(
+                ring.width / 2, // Center X
+                ring.height / 2, // Center Y
+                ring.width / 2 // Radius
+            ),
+            Phaser.Geom.Circle.Contains
+        );
+    
+        // Set the horizontal velocity for the ring
+        ring.setVelocityX(-200 - this.score * 0.4);
+    
+        // Remove the ring when it goes out of bounds
+        ring.checkWorldBounds = true;
+        ring.outOfBoundsKill = true;
     }
 
     //game over function

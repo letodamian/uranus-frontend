@@ -35,7 +35,7 @@ export class MainMenu extends Scene {
         this.background = this.add.image(512, 300, "background");
         this.logo = this.add.image(centerX, 120, "logo").setDepth(100);
         this.ringUranus = this.add
-            .image(centerX, centerY + 140, "ring")
+            .image(centerX, centerY + 140, "ringUranus")
             .setDepth(10);
         this.ground = this.add
             .image(centerX, centerY * 2 - 50, "ground")
