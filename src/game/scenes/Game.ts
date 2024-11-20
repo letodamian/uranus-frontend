@@ -214,7 +214,7 @@ export class Game extends Scene {
         const flameSpacing = 300;
         const lastflame = this.flames.getLast(true);
         const startX = lastflame ? lastflame.x + flameSpacing : 800;
-        flame.setVelocityX(-200 - this.score * 0.4);
+        flame.setVelocityX(-300 - this.score * 0.4);
 
         flame.checkWorldBounds = true;
         flame.outOfBoundsKill = true;
