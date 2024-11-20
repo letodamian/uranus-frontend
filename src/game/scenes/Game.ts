@@ -45,8 +45,8 @@ export class Game extends Scene {
         this.meteoSpeedBase = 200;
         this.flameSpawnInterval = 7500;
         this.flameSpeedBase = 300;
-        this.flameSpawnInterval = 2500;
-        this.flameSpeedBase = 300;
+        this.ringSpawnInterval = 2500;
+        this.ringSpeedBase = 300;
         //set background Iamge
 
         //setup ground
