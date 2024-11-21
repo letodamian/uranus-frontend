@@ -186,15 +186,16 @@ export class Game extends Scene {
         ring.disableBody(true, true);
         console.log("I eat a ring!!");
         // Show the Boosting button
-        if (!this.boostingButton) {
+       
             this.createBoostingButton();
             console.log("createBoosting Button created");
-        } else {
+       
             this.boostingButton.setVisible(true);
             this.boostingButtonText.setVisible(true);
-            console.log("display boosting button")
-        }
-        return 0;
+            
+        
+   
+       
         
     }
     
