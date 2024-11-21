@@ -176,18 +176,23 @@ export class Game extends Scene {
     jump() {
         this.uranus.setVelocityY(-250);
     }
-    collectRing(uranus: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, ring: Phaser.GameObjects.GameObject) {
-        // Destroy the ring
-        const ringBody = ring as Phaser.Physics.Arcade.Sprite;
-        ringBody.disableBody(true, true);
+    collectRing(uranus: Phaser.Physics.Arcade.Sprite, ring: Phaser.Physics.Arcade.Sprite) {
+        
     
+        // Destroy the ring
+        ring.disableBody(true, true);
+        console.log("I eat a ring!!");
         // Show the Boosting button
         if (!this.boostingButton) {
             this.createBoostingButton();
+            console.log("createBoosting Button created");
         } else {
             this.boostingButton.setVisible(true);
             this.boostingButtonText.setVisible(true);
+            console.log("display boosting button")
         }
+        return 0;
+        
     }
     
     createBoostingButton() {
