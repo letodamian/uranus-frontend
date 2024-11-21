@@ -28,6 +28,9 @@ export class Game extends Scene {
     highScore = 0;
     gameOver = false;
     boostingActive = false;
+    meteoCollider: Phaser.Physics.Arcade.Collider;
+    ringCollider: Phaser.Physics.Arcade.Collider;
+    flameCollider: Phaser.Physics.Arcade.Collider;
 
     constructor() {
         super("Game");
@@ -48,7 +51,7 @@ export class Game extends Scene {
         this.meteoSpeedBase = 200;
         this.flameSpawnInterval = 7500;
         this.flameSpeedBase = 300;
-        this.ringSpawnInterval = 2500;
+        this.ringSpawnInterval = 5500;
         this.ringSpeedBase = 300;
         //set background Iamge
 
@@ -123,14 +126,14 @@ export class Game extends Scene {
         });
 
         //add collider event to ground and meteos
-        this.physics.add.collider(
+        this.meteoCollider = this.physics.add.collider(
             this.uranus,
             this.meteos,
             this.gameOverHandler,
             undefined,
             this
         );
-        this.physics.add.collider(
+        this.flameCollider = this.physics.add.collider(
             this.uranus,
             this.flames,
             this.gameOverHandler,
@@ -146,7 +149,7 @@ export class Game extends Scene {
             this
         );
 
-        this.physics.add.overlap(
+        this.ringCollider = this.physics.add.overlap(
             this.uranus,
             this.ring,
             this.collectRing,
@@ -206,7 +209,7 @@ export class Game extends Scene {
         this.boostingButton.fillStyle(0x00ff00, 1); // Green button
         this.boostingButton.fillRoundedRect(
             centerX - buttonWidth / 2,
-            this.scale.gameSize.height - 100,
+            this.scale.gameSize.height - 50,
             buttonWidth,
             buttonHeight,
             buttonRadius
@@ -249,10 +252,12 @@ export class Game extends Scene {
         this.boostingActive = true;
         this.uranus.setTexture("ringUranus");
         this.uranus.clearTint(); // Clear any tint applied during Game Over
-
+        this.meteoCollider.active = false;
+        this.flameCollider.active = false;
+        this.ringCollider.active = false;
         // Set a timer to disable invincibility after 30 seconds
         this.boostTimer = this.time.addEvent({
-            delay: 30000, // 30 seconds
+            delay: 3000, // 30 seconds
             callback: this.deactivateBoosting,
             callbackScope: this,
         });
@@ -261,6 +266,9 @@ export class Game extends Scene {
     deactivateBoosting() {
         this.boostingActive = false;
         this.uranus.setTexture("uranus"); // Replace with your normal image key
+        this.meteoCollider.active = true;
+        this.flameCollider.active = true;
+        this.ringCollider.active = true;
     }
     //adding random meteos
     addMeteo() {
