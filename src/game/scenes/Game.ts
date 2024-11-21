@@ -187,11 +187,7 @@ export class Game extends Scene {
         console.log("I eat a ring!!");
         // Show the Boosting button
        
-            this.createBoostingButton();
-            console.log("createBoosting Button created");
-       
-            this.boostingButton.setVisible(true);
-            this.boostingButtonText.setVisible(true);
+           this.activateBoosting();
             
         
    
