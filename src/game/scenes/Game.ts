@@ -236,8 +236,8 @@ export class Game extends Scene {
         this.boostingButton.on("pointerdown", this.activateBoosting, this);
 
         // Initially hide the button
-        this.boostingButton.setVisible(false);
-        this.boostingButtonText.setVisible(false);
+        this.boostingButton.setVisible(true);
+        this.boostingButtonText.setVisible(true);
     }
 
     activateBoosting() {
