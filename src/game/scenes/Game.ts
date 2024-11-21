@@ -312,8 +312,8 @@ export class Game extends Scene {
             flame.width * flame.scaleX,
             flame.height * flame.scaleY
         );
-        flame.body.setSize(flame.width, flame.height / 2); // Width and height for the ellipse
-        flame.body.setOffset(-flame.width / 2, -flame.height / 4); // Adjust offset to center the body
+        //flame.body.setSize(flame.width, flame.height / 2); // Width and height for the ellipse
+        flame.body.setOffset(-flame.width / 2, -flame.height / 2); // Adjust offset to center the body
 
         // Making the flame interactive with an ellipse
         flame.setInteractive(
@@ -321,11 +321,10 @@ export class Game extends Scene {
                 flame.width / 2, // Center X of the ellipse
                 flame.height / 2, // Center Y of the ellipse
                 flame.width, // Width of the ellipse
-                flame.height / 2 // Height of the ellipse
+                flame.height  // Height of the ellipse
             ),
             Phaser.Geom.Ellipse.Contains
         );
-        flame.setShadow(2,2,  '#00ff00', 4);
         const flameSpacing = 300;
         const lastflame = this.flames.getLast(true);
         const startX = lastflame ? lastflame.x + flameSpacing : 800;
