@@ -325,6 +325,7 @@ export class Game extends Scene {
             ),
             Phaser.Geom.Ellipse.Contains
         );
+        flame.setShadow(2,2,  '#00ff00', 4);
         const flameSpacing = 300;
         const lastflame = this.flames.getLast(true);
         const startX = lastflame ? lastflame.x + flameSpacing : 800;
