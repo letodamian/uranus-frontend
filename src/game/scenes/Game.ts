@@ -206,7 +206,7 @@ export class Game extends Scene {
 
         // Button background
         this.boostingButton = this.add.graphics();
-        this.boostingButton.fillStyle(0x00ff00, 1); // Green button
+        this.boostingButton.fillStyle(0xfff, 1); // Green button
         this.boostingButton.fillRoundedRect(
             centerX - buttonWidth / 2,
             this.scale.gameSize.height - 75,
