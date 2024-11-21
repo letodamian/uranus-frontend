@@ -191,55 +191,55 @@ export class Game extends Scene {
         this.activateBoosting();
     }
 
-    createBoostingButton() {
-        const buttonWidth = 200;
-        const buttonHeight = 50;
-        const buttonRadius = 10;
-        const centerX = this.scale.gameSize.width / 2;
+    // createBoostingButton() {
+    //     const buttonWidth = 200;
+    //     const buttonHeight = 50;
+    //     const buttonRadius = 10;
+    //     const centerX = this.scale.gameSize.width / 2;
 
-        // Button background
-        this.boostingButton = this.add.graphics();
-        this.boostingButton.fillStyle(0xffffff, 1); // Green button
-        this.boostingButton.fillRoundedRect(
-            centerX - buttonWidth / 2,
-            this.scale.gameSize.height - 75,
-            buttonWidth,
-            buttonHeight,
-            buttonRadius
-        );
+    //     // Button background
+    //     this.boostingButton = this.add.graphics();
+    //     this.boostingButton.fillStyle(0xffffff, 1); // Green button
+    //     this.boostingButton.fillRoundedRect(
+    //         centerX - buttonWidth / 2,
+    //         this.scale.gameSize.height - 75,
+    //         buttonWidth,
+    //         buttonHeight,
+    //         buttonRadius
+    //     );
 
-        // Button text
-        this.boostingButtonText = this.add
-            .text(centerX, this.scale.gameSize.height - 50, "BOOSTING", {
-                fontSize: "24px",
-                color: "#000",
-                fontFamily: "ArcadeClassic",
-            })
-            .setOrigin(0.5);
+    //     // Button text
+    //     this.boostingButtonText = this.add
+    //         .text(centerX, this.scale.gameSize.height - 50, "BOOSTING", {
+    //             fontSize: "24px",
+    //             color: "#000",
+    //             fontFamily: "ArcadeClassic",
+    //         })
+    //         .setOrigin(0.5);
 
-        // Make the button interactive
-        this.boostingButton.setInteractive(
-            new Phaser.Geom.Rectangle(
-                centerX - buttonWidth / 2,
-                this.scale.gameSize.height - 75,
-                buttonWidth,
-                buttonHeight
-            ),
-            Phaser.Geom.Rectangle.Contains
-        );
+    //     // Make the button interactive
+    //     this.boostingButton.setInteractive(
+    //         new Phaser.Geom.Rectangle(
+    //             centerX - buttonWidth / 2,
+    //             this.scale.gameSize.height - 75,
+    //             buttonWidth,
+    //             buttonHeight
+    //         ),
+    //         Phaser.Geom.Rectangle.Contains
+    //     );
 
-        // Handle button click
-        this.boostingButton.on("pointerdown", this.activateBoosting, this);
+    //     // Handle button click
+    //     this.boostingButton.on("pointerdown", this.activateBoosting, this);
 
-        // Initially hide the button
-        this.boostingButton.setVisible(true);
-        this.boostingButtonText.setVisible(true);
-    }
+    //     // Initially hide the button
+    //     this.boostingButton.setVisible(true);
+    //     this.boostingButtonText.setVisible(true);
+    // }
 
     activateBoosting() {
         // Hide the Boosting button
-        this.boostingButton.setVisible(false);
-        this.boostingButtonText.setVisible(false);
+        // this.boostingButton.setVisible(false);
+        // this.boostingButtonText.setVisible(false);
 
         // Make uranus invincible
         this.boostingActive = true;
