@@ -209,7 +209,7 @@ export class Game extends Scene {
         this.boostingButton.fillStyle(0x00ff00, 1); // Green button
         this.boostingButton.fillRoundedRect(
             centerX - buttonWidth / 2,
-            this.scale.gameSize.height - 50,
+            this.scale.gameSize.height - 75,
             buttonWidth,
             buttonHeight,
             buttonRadius
@@ -217,7 +217,7 @@ export class Game extends Scene {
 
         // Button text
         this.boostingButtonText = this.add
-            .text(centerX, this.scale.gameSize.height - 75, "BOOSTING", {
+            .text(centerX, this.scale.gameSize.height - 50, "BOOSTING", {
                 fontSize: "24px",
                 color: "#000",
                 fontFamily: "ArcadeClassic",
@@ -228,7 +228,7 @@ export class Game extends Scene {
         this.boostingButton.setInteractive(
             new Phaser.Geom.Rectangle(
                 centerX - buttonWidth / 2,
-                this.scale.gameSize.height - 100,
+                this.scale.gameSize.height - 75,
                 buttonWidth,
                 buttonHeight
             ),
