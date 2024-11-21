@@ -51,7 +51,7 @@ export class Game extends Scene {
         this.meteoSpeedBase = 200;
         this.flameSpawnInterval = 7500;
         this.flameSpeedBase = 300;
-        this.ringSpawnInterval = 25000;
+        this.ringSpawnInterval = 10000;
         this.ringSpeedBase = 300;
         //set background Iamge
 
@@ -318,7 +318,7 @@ export class Game extends Scene {
         // Making the flame interactive with an ellipse
         flame.setInteractive(
             new Phaser.Geom.Ellipse(
-                flame.width / 2, // Center X of the ellipse
+                flame.width , // Center X of the ellipse
                 flame.height / 2, // Center Y of the ellipse
                 flame.width, // Width of the ellipse
                 flame.height  // Height of the ellipse
