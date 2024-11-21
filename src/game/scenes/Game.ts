@@ -296,7 +296,7 @@ export class Game extends Scene {
     }
     addFlame() {
         if (this.gameOver) return;
-        const flameType = Phaser.Math.Between(1, 5);
+        const flameType = Phaser.Math.Between(1, 4);
         const flame = this.flames.create(
             900,
             Phaser.Math.Between(150, 550),
