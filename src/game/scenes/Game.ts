@@ -369,8 +369,10 @@ export class Game extends Scene {
     //game over function
     gameOverHandler() {
         if (this.boostingActive) {
-            // Ignore collision if boosting is active
-            return;
+            // End the boost and reset state
+            this.deactivateBoosting();
+            // Remove the collided object (optional)
+            return; // Stop further handling this collision
         }
         this.gameOver = true;
         this.uranus.setTint(0xff0000);
