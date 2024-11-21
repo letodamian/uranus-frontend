@@ -207,7 +207,7 @@ export class Game extends Scene {
 
         // Button background
         this.boostingButton = this.add.graphics();
-        this.boostingButton.fillStyle(0xfff, 1); // Green button
+        this.boostingButton.fillStyle(0xffffff, 1); // Green button
         this.boostingButton.fillRoundedRect(
             centerX - buttonWidth / 2,
             this.scale.gameSize.height - 75,
@@ -295,7 +295,7 @@ export class Game extends Scene {
         const meteoSpacing = 300;
         const lastMeteo = this.meteos.getLast(true);
         const startX = lastMeteo ? lastMeteo.x + meteoSpacing : 800;
-        meteo.setVelocityX(-200 - this.score * 0.4);
+        meteo.setVelocityX(-200 - this.score * 0.05);
 
         meteo.checkWorldBounds = true;
         meteo.outOfBoundsKill = true;
@@ -334,7 +334,7 @@ export class Game extends Scene {
         const flameSpacing = 300;
         const lastflame = this.flames.getLast(true);
         const startX = lastflame ? lastflame.x + flameSpacing : 800;
-        flame.setVelocityX(-300 - this.score * 0.4);
+        flame.setVelocityX(-300 - this.score * 0.05);
 
         flame.checkWorldBounds = true;
         flame.outOfBoundsKill = true;
@@ -365,7 +365,7 @@ export class Game extends Scene {
         );
 
         // Set the horizontal velocity for the ring
-        ring.setVelocityX(-250 - this.score * 0.4);
+        ring.setVelocityX(-250 - this.score * 0.05);
 
         // Remove the ring when it goes out of bounds
         ring.checkWorldBounds = true;
