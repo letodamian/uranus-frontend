@@ -244,7 +244,7 @@ export class Game extends Scene {
         // Make uranus invincible
         this.boostingActive = true;
         this.uranus.setTexture("ringUranus");
-        this.uranus.setScale(120 / 189, 120 / 189);
+        this.uranus.setScale(140 / 189, 140 / 189);
         this.uranus.clearTint(); // Clear any tint applied during Game Over
         this.meteoCollider.active = false;
         this.flameCollider.active = false;
