@@ -179,22 +179,18 @@ export class Game extends Scene {
     jump() {
         this.uranus.setVelocityY(-250);
     }
-    collectRing(uranus: Phaser.Physics.Arcade.Sprite, ring: Phaser.Physics.Arcade.Sprite) {
-        
-    
+    collectRing(
+        uranus: Phaser.Physics.Arcade.Sprite,
+        ring: Phaser.Physics.Arcade.Sprite
+    ) {
         // Destroy the ring
         ring.disableBody(true, true);
         console.log("I eat a ring!!");
         // Show the Boosting button
-       
-           this.activateBoosting();
-            
-        
-   
-       
-        
+
+        this.activateBoosting();
     }
-    
+
     createBoostingButton() {
         const buttonWidth = 200;
         const buttonHeight = 50;
@@ -248,14 +244,14 @@ export class Game extends Scene {
         // Make uranus invincible
         this.boostingActive = true;
         this.uranus.setTexture("ringUranus");
-        this.uranus.setScale(83/189, 81/189);
+        this.uranus.setScale(120 / 189, 120 / 189);
         this.uranus.clearTint(); // Clear any tint applied during Game Over
         this.meteoCollider.active = false;
         this.flameCollider.active = false;
         this.ringCollider.active = false;
         // Set a timer to disable invincibility after 30 seconds
         this.boostTimer = this.time.addEvent({
-            delay: 3000, // 30 seconds
+            delay: 5000, // 30 seconds
             callback: this.deactivateBoosting,
             callbackScope: this,
         });
@@ -264,7 +260,7 @@ export class Game extends Scene {
     deactivateBoosting() {
         this.boostingActive = false;
         this.uranus.setTexture("uranus");
-        this.uranus.setScale(1,1); // Replace with your normal image key
+        this.uranus.setScale(1, 1); // Replace with your normal image key
         this.meteoCollider.active = true;
         this.flameCollider.active = true;
         this.ringCollider.active = true;
@@ -473,4 +469,3 @@ export class Game extends Scene {
         EventBus.emit("game-over", { score: this.score });
     }
 }
-
