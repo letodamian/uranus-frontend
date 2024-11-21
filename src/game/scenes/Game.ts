@@ -176,10 +176,11 @@ export class Game extends Scene {
     jump() {
         this.uranus.setVelocityY(-250);
     }
-    collectRing() {
+    collectRing(uranus: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, ring: Phaser.GameObjects.GameObject) {
         // Destroy the ring
-        this.ring.destroy();
-
+        const ringBody = ring as Phaser.Physics.Arcade.Sprite;
+        ringBody.disableBody(true, true);
+    
         // Show the Boosting button
         if (!this.boostingButton) {
             this.createBoostingButton();
@@ -188,6 +189,7 @@ export class Game extends Scene {
             this.boostingButtonText.setVisible(true);
         }
     }
+    
     createBoostingButton() {
         const buttonWidth = 200;
         const buttonHeight = 50;
@@ -349,7 +351,7 @@ export class Game extends Scene {
         );
 
         // Set the horizontal velocity for the ring
-        ring.setVelocityX(-200 - this.score * 0.4);
+        ring.setVelocityX(-250 - this.score * 0.4);
 
         // Remove the ring when it goes out of bounds
         ring.checkWorldBounds = true;
