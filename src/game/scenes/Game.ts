@@ -318,7 +318,7 @@ export class Game extends Scene {
         // Making the flame interactive with an ellipse
         flame.setInteractive(
             new Phaser.Geom.Ellipse(
-                flame.width , // Center X of the ellipse
+                flame.width + 20 , // Center X of the ellipse
                 flame.height / 2, // Center Y of the ellipse
                 flame.width, // Width of the ellipse
                 flame.height  // Height of the ellipse
